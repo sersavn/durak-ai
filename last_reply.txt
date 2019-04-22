@@ -1,0 +1,1568 @@
+
+
+<!DOCTYPE html>
+<html>
+<!--TODO: lang-->
+<head lang="ru">
+    <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>«Дурак» — играть онлайн</title>
+
+<script type="text/javascript">
+    var _game = 'fool';
+    var _sessionId = "7532760955cb4a261509b83.53923874";
+    var _userId = 57866193;
+    var _username = "Гость 51468784";
+    var _sign = "148e343ebdf9a08c02f0eeeec3ccda940548c8059b7f57d62e939365893006d9";
+    var _isGuest = true;
+    var _lang = 'ru';
+    var _gameVariationId = 28;
+    var _isVk = false ;
+    var _isMm = false;
+    var _isFb = (window.location!=top.location && !_isVk && !_isMm);
+    var _isIframe = (window.location!=top.location);
+    var _FB_ID = '681233612017189';
+    var _isFreshUser = true;
+    var _userData = {
+        userId: _userId.toString(),
+        userName: _username,
+        sign: _sign,
+        isGuest: _isGuest,
+        isFreshUser: _isFreshUser,
+        game: _game,
+        isVk: _isVk
+    }
+    var _visitorStats={"yesterday":3417,"today":2888,"total":306994,"allGamesOnline":{"total":{"users":1781,"rooms":419,"today":60349,"yesterday":75580},"games":{"kosynka":{"users":713,"rooms":null,"today":"5166","yesterday":"6678"},"freecell":{"users":2358,"rooms":null,"today":"17979","yesterday":"21178"},"spider":{"users":1543,"rooms":null,"today":"11690","yesterday":"13938"},"chess":{"users":169,"rooms":null,"today":"1092","yesterday":"1723"},"sokoban":{"users":12,"rooms":null,"today":0,"yesterday":"203"},"gomoku":{"users":90,"rooms":null,"today":"606","yesterday":"894"},"iq":{"users":7,"rooms":null,"today":"41","yesterday":"80"},"baker":{"users":80,"rooms":null,"today":"564","yesterday":"776"},"sudoku":{"users":92,"rooms":null,"today":"681","yesterday":"860"},"skiff":{"users":4,"rooms":null,"today":"25","yesterday":"44"},"poker":{"users":191,"rooms":null,"today":"1362","yesterday":"1811"},"speed":{"users":0,"rooms":null,"today":"5","yesterday":"10"},"memory":{"users":0,"rooms":null,"today":0,"yesterday":"9"},"checkers":{"users":"695","rooms":"183","today":"5354","yesterday":"7288"},"battleship":{"users":114,"rooms":null,"today":"765","yesterday":"1140"},"lines":{"users":50,"rooms":null,"today":"408","yesterday":"431"},"rsp":{"users":1,"rooms":null,"today":"5","yesterday":"14"},"othello":{"users":"27","rooms":"4","today":"249","yesterday":"341"},"tetris":{"users":80,"rooms":null,"today":"580","yesterday":"749"},"match3":{"users":32,"rooms":null,"today":"243","yesterday":"301"},"arkanoid":{"users":0,"rooms":null,"today":0,"yesterday":0},"dots":{"users":24,"rooms":null,"today":"187","yesterday":"223"},"pyramid":{"users":97,"rooms":null,"today":"663","yesterday":"954"},"fool":{"users":"372","rooms":"82","today":"2887","yesterday":"3417"},"snake":{"users":1,"rooms":null,"today":0,"yesterday":"17"},"balda":{"users":"592","rooms":"129","today":"3881","yesterday":"4620"},"minesweeper":{"users":23,"rooms":null,"today":"180","yesterday":"218"},"nim":{"users":0,"rooms":null,"today":0,"yesterday":0},"pacman":{"users":2,"rooms":null,"today":0,"yesterday":"36"},"mat":{"users":175,"rooms":null,"today":"1308","yesterday":"1608"},"tripeaks":{"users":101,"rooms":null,"today":"683","yesterday":"1007"},"ege_math":{"users":0,"rooms":null,"today":0,"yesterday":0},"scorpion":{"users":289,"rooms":null,"today":"2056","yesterday":"2755"},"fillword":{"users":36,"rooms":null,"today":"270","yesterday":"328"},"Pdd":{"users":0,"rooms":null,"today":"5","yesterday":"9"},"ege_it":{"users":0,"rooms":null,"today":0,"yesterday":0},"gims":{"users":0,"rooms":null,"today":0,"yesterday":0},"domino":{"users":"95","rooms":"21","today":"713","yesterday":"822"},"fourteen":{"users":4,"rooms":null,"today":0,"yesterday":"68"},"geography":{"users":0,"rooms":null,"today":0,"yesterday":"7"},"animal_tracking":{"users":0,"rooms":null,"today":"3","yesterday":"7"},"recognize_fish":{"users":0,"rooms":null,"today":"5","yesterday":"5"},"recognize_tree":{"users":0,"rooms":null,"today":0,"yesterday":"6"},"recognize_vegetable":{"users":0,"rooms":null,"today":0,"yesterday":"10"},"recognize_flag":{"users":0,"rooms":null,"today":0,"yesterday":0},"recognize_fruit":{"users":0,"rooms":null,"today":0,"yesterday":"8"},"go":{"users":2,"rooms":null,"today":0,"yesterday":"45"},"prisoner":{"users":0,"rooms":null,"today":0,"yesterday":0},"raschet":{"users":15,"rooms":null,"today":"112","yesterday":"139"},"connect4":{"users":8,"rooms":null,"today":"52","yesterday":"93"},"twentyone":{"users":6,"rooms":null,"today":"38","yesterday":"62"},"blackjack":{"users":0,"rooms":null,"today":0,"yesterday":0}}}};
+    
+   _visitorStats.online = parseInt(_visitorStats.allGamesOnline.games[_game].users || 0) + 1
+</script>
+
+<script type='text/javascript' src='/build/frontend/commons_9f1f7adc32a1fc53d737.js?v=16610'></script> 
+<script type='text/javascript' src='/build/frontend/logic_1fdba9c450c341761295.js?v=16610'></script> 
+<script type='text/javascript' src='/js/lang/lang.ru.js?v=16610'></script> 
+<script src='/js/shared/lg-facebook.js?v=16610' type='text/javascript'></script>
+<script src="https://browser.sentry-cdn.com/4.4.1/bundle.min.js" crossorigin="anonymous"></script>
+<script type="text/javascript">
+    var _sign = 1111111111111;
+    var _isLocal = false;
+    var _isTest = false;
+    var _isMobile = false; //initiate as false
+    if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|ipad|iris|kindle|Android|Silk|lge |maemo|midp|mmp|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows (ce|phone)|xda|xiino/i.test(navigator.userAgent)
+        || /1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(navigator.userAgent.substr(0,4))) _isMobile = true;
+
+    if(_isVk) {
+        document.getElementsByTagName('html')[0].classList.add('body-wrap__VK');
+    }
+
+    var _isPresetsEnabled = false;
+
+</script>
+
+    <link href="build/styles.css?v=_2.6.4" rel="stylesheet" type="text/css">
+
+<link rel="stylesheet" href="/v6-game-client/build/v6-game-client.css?v=16610"/><script src="/v6-game-client/app/lib/underscore-min.js"></script><script src="/v6-game-client/app/lib/backbone-min.js"></script><script src="/v6-game-client/build/v6-game-client.js?v=16610"></script>
+</head>
+<body>
+
+<div id="main-wrapper" class="lg-unwrapped  ">
+
+    <div id="description">
+        <div class="description-wrapper">
+            <img id="closeDescription" src="/img/icons/icon_close.png" alt=""/>
+            <div class="description-container">
+            <!-- /app/description/ru/fool/description.inc--><h2>Правила</h2>
+<p>
+    Игра «Дурак» появилась в 19-м веке в России. Поначалу игра была популярна только у
+    народно-крестьянской части населения. Высший свет больше предпочитал такие игры, как
+    покер, бридж, пасьянс, однако уже в следующем веке во времена СССР игра обрела свою
+    популярность среди всех слоёв населения и не теряет её до сих пор.
+</p>
+<p>
+    В режимах Подкидной и Переводной (36 карт) используется колода из 36 карт, в режиме Подкидной (52 карты) - из 52 карт. Старшинство карт в колоде определяется от
+    меньшего значения к большему - (2, 3, 4, 5), 6, 7, 8, 9, 10, Валет, Дама, Король, Туз.
+</p>
+<p>
+    Каждому игроку раздаётся по 6 карт. После этого определяется козырь – произвольно достаётся
+    карта из колоды и её масть устанавливает козырь для данной игры. Оставшаяся колода кладётся
+    сверху так, чтобы козырная карта была всем видна. Козырная карта (карта с мастью козыря)
+    может бить любую другую некозырную карту, а также козырную карту меньшего достоинства.
+    Козырный туз побить в игре невозможно. Цель игры — избавиться от всех карт. Последний игрок,
+    не избавившийся от карт, остаётся в «дураках».
+</p>
+
+<p>
+    Первым ходит тот, у кого среди розданных карт находится наименьший козырь среди розданных
+    всем игрокам карт. Игрок ходит под соперника любой своей картой, в зависимости от выбранной
+    им стратегии (к примеру целью хода может быть избавление от карт наименьшего достоинства
+    или стремление сходить так, чтобы соперник взял карты и т.д.). В игре также разрешается
+    подкидывать карту сопернику, если у вас есть карта такая же по достоинству как какая-либо карта,
+    которой соперник побился (пример – вы походили семёркой, соперник побил её десяткой – в
+    этом случае вы имеете право подкинуть десятку, если она у вас есть). Если все карты побиты и Вам
+    нечего подкинуть, то карты, участвовавшие на этом ходу, уходят в отбой – «бито», недостающие до
+    6 карт берутся из колоды сначала тем кто ходил. Потом тем, кто отбивался, и ход переходит к
+    отбивавшемуся игроку. Если соперник не может отбить подкинутые вами карты – он забирает их
+    себе, Вы берёте недостающие до 6 карт из колоды и снова ходите. Количество карт,
+    подкидываемых игроком до первой биты не может быть более 5. После первой биты не более 6.
+</p>
+<p>В игре также возможна ничья — когда игрок ходит последними картами, а соперник отбивается
+    последними картами – т.е. в результате в конце игры карт не остаётся ни у одного из соперников
+    ни в колоде.</p>
+
+<!--Кнопка "Показать описание"-->   
+<input type="checkbox" id="description-showMore">   
+<label for="description-showMore">Показать полное описание</label>
+<label for="description-showMore">Скрыть полное описание</label>
+
+<!--Дополнительная информация-->
+<div id="description-more">
+
+<h4>Верхняя панель кнопок в игре с компьютером</h4>
+<img src="/description/ru/fool/img/top_panel.png"/>
+
+<p><b>Подкидной (36 карт)</b> — переключение в режим подкидного дурака (в колоде 36 карт, вы можете подкинуть сопернику до 6 карт);</p>
+<p><b>Подкидной (52 карты)</b> — переключение в режим подкидного дурака (в колоде 52 карты, вы можете подкинуть сопернику до 6 карт);</p>
+<p><b>Переводной (36 карт)</b> — переключение в режим переводного дурака (в колоде 36 карт, вы можете перевести карты вашему сопернику);</p>
+<p><b>Новая игра</b>  — начинает новую игру с компьютером.</p>   
+ 
+<h4>Дополнительные кнпоки в совместной игре</h4>
+<img src="/description/ru/img/pair_top_panel_multiplayer.png"/>
+<p><strong>Предложить ничью</strong> — позволяет отправить сорпенику предложение о ничьей. В случае его согласия игра будет завершена как ничья, при этом количество очков у обоих игроков не изменится;</p>
+<p><strong>Сдаться</strong> — завершает игру (засчитывается поражение).</p>
+<p><strong>Покинуть игру</strong> — позволяет немедленно завершить текущую игру (засчитывается поражение).</p>
+<h4>Нижняя панель кнопок</h4>
+<p><img src="/description/ru/img/pair_bottom_panel.png" /></p>
+<p><strong>Настройки </strong>— открывает меню настроек, в котором вы можете:</p>
+<ul>
+    <li>Изменить лицо карт (стандартное, упрощенное, четырехцветное);</li>
+    <li>Изменить рубашку карт (клетчатая, градиент, изначальная);</li>
+    <li>Выбрать способ сортировки карт (без сортировки, по масти, по значению, по значению(козырь всегда справа));</li>
+    <li>Выбрать отображемую масть козыря (как есть, пики, бубны, трефы, червы);</li>
+    <li>Выбрать способ хода (одинарным или двойным кликом);</li>
+    <li>Включить или выключить звук;</li>
+    <li>Запретить другим игрокам приглашать вас в игру;</li>
+    <li>Открыть черный список игроков.</li>
+</ul>
+
+<p><strong>История</strong> — история всех ваших игр с указанием даты игры, противника и его места в рейтинге.</p>
+<p>Жёлтым цветом отмечены выигранные вами партии, красным – проигранные, синим – завершенные ничьей.</p>
+<p>Звёздочкой отмечены игры, занесённые вами в избранное.</p>
+<img src="/description/ru/img/pair_history.png"/>
+<p><strong>Рейтинг игроков</strong> — результаты зарегистрированных игроков, упорядоченных по количеству набранных очков.</p>
+<img src="/description/ru/img/pair_rating.png"/>
+<p>Очки начисляются только за победы над противниками (за ничьи и победы над компьютером очки не начисляются).</p>
+<p>Начисление очков идет по <a href="http://ru.wikipedia.org/wiki/%D0%A0%D0%B5%D0%B9%D1%82%D0%B8%D0%BD%D0%B3_%D0%AD%D0%BB%D0%BE" target="_blank">системе Эло</a>.</p>
+<p>Система рейтингов Эло, коэффициент Эло — метод расчёта относительной силы игроков в играх, в которых участвуют двое игроков. Эту систему рейтингов разработал американский профессор физики венгерского происхождения Арпад Эло.</p><p><strong>Авторизация / Личный кабинет</strong> — возможность войти в личный кабинет (ЛК), произвести авторизацию или зарегистрироваться.</p>
+<img src="/description/ru/img/profile.png" alt="Личный кабинет">
+<p>В личном кабинете вы можете указать дополнительную информацию о себе, загрузить фото, изменить пароль, а также хранить и осуществлять личную переписку с другими зарегистрированными игроками.</p>
+<p>Вы можете играть без регистрации в качестве гостя. После регистрации и/или авторизации вы получите доступ в личный кабинет и сможете отправлять другим игрокам личные сообщения.</p>
+<p>Чтобы зарегистрироваться надо просто ввести имя (от 3 символов) и пароль (не менее 5 символов). Если такое имя уже зарегистрировано в игре, вам придется выбрать другое.</p>
+</div>            </div>
+        </div>
+    </div>
+    <div id="app-container">
+            <div id="left-block" >
+                <div id="left">
+
+    <div id="playerListWrapper"></div>
+    <div id="chatWrapper"></div>
+</div>            </div>
+            <div id="middle-block" >
+                <div id="game-field">
+                    <div class="gameZona">
+    <div class="gameArea" id="gameArea">
+
+        <!-- TOP LINKS -->
+        <!--
+        <div class="titleBand">
+            <div class="titleBandInner">
+                <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                    <tr>
+                        <td width="1%" style="white-space: nowrap;">
+                            <span class="titleBandLink" id="title">
+                               Дурак                            </span>
+                        </td>
+
+                        <td>&nbsp;</td>
+
+                        <td width="1%" align="center" style="white-space: nowrap;">
+                            <span class="titleBandLink" id="showDescription">
+                                Правила                            </span>
+                        </td>
+
+                        <td>&nbsp;</td>
+
+                        <td width="1%" align="center" style="white-space: nowrap;">
+                            <span id="gbShow" class="titleBandLink">
+                                Вопросы и отзывы                            </span>
+                        </td>
+
+                        <td>&nbsp;</td>
+
+                        <td width="1%" align="right" style="white-space: nowrap;">
+                            <a href="/"
+                               class="titleBandLink" >
+                                Перейти на другие игры                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        -->
+
+        <!-- TOP BUTTONS -->
+        <div class="nonSelectable">
+            <div class="controlPanelLayout top">
+
+            </div>
+        </div>
+
+        <!-- GAME FIELD !! важно чтобы был див с таким айдишников и центрированием, относительного него и будет центрироваться блок с авторизацией !!-->
+        <div id="field" class="theme1 card_design_color possible_move_style_highlight type_computer">
+            <div class="helloScreen"></div>
+
+            <div id="gameField" style="display: none;">
+                <div class="canvas-status"><span></span></div>
+                <div class="presetHeader">
+                    <div class="presetTitle"></div>
+                </div>
+                <div class="spectatorModeButton typeElement typeElement__loaded typeElement__spectator" style="display: none;">
+                    <div class="header text"></div>
+                    <div class="header presetTitle"></div>
+                    <div><img class="closeDescription" src="img/icon_close.png" onclick="app.game.set({active: false});"></div>
+
+                    <div class="buttonWrapper buttonWrapper__onTop buttonWrapper__saveCompGame typeElement typeElement__loaded" style="display: none;"></div>
+                    <div class="buttonWrapper buttonWrapper__onTop buttonWrapper__analysis typeElement typeElement__loaded" style="display: none;"></div>
+                </div>
+                <!-- typeElement typeElement__multiplayer -->
+                <div class="buttonWrapper buttonWrapper__onTop buttonWrapper__onTop__training" style="display: none;">
+                    <div class="playManagerButton symbolButton playManagerArrow">
+                        <div class="arrowWrapper trainingButton pressable" data-attr="training">Тренировка</div>
+                    </div>
+                </div>
+
+                <div class="player player_1"></div>
+                <div class="player player_0"></div>
+                <div class="score"></div>
+                <div class="gameResultMessage"></div>
+                <div class="gameActionMessage"></div>
+                <div class="table"></div>
+                <div class="deck"></div>
+                <div class="pile">
+                    <div class="pileCards"></div>
+                    <div class="pileState cardsState"></div>
+                </div>
+                <div class="turn">
+                    <div class="turnStatus"><div class="text"></div></div>
+                    <div class="turnThrowTime"><span class="throwTime"></span></div>
+                    <div class="turnTime"><span class="time"></span></div>
+                </div>
+                <div id="buttons"></div>
+                <div class="hand hand_0"></div>
+                <div class="hand hand_1"></div>
+                <div class="rivalState cardsState"></div>
+                <div class="localState cardsState"></div>
+                <div class="animationCards"></div>
+                <div class="errorMessage"></div>
+                <div class="livePanelWrapper">
+                    <div class="rewindPanel typeElement typeElement__loaded typeElement__computer"></div>
+                    <div class="ingamePanel typeElement typeElement__multiplayer" style="display: none;"></div>
+                </div>
+            </div>
+        </div>
+
+        
+        <!-- BOTTOM BUTTONS -->
+        <div class="controlPanel controlPanel__bottom nonSelectable">
+            <table class="controlPanelLayout">
+                <tbody>
+
+                <tr>
+                    <td id="bbParameters" class="cpButton cpNormal nonSelectable" onclick="app.client.viewsManager.closeAll();app.client.viewsManager.showSettings();">Настройки</td>
+                    <td id="showDescription" class="cpButton cpNormal nonSelectable">Правила</td>
+                    <td id="gbShow" class="cpButton cpNormal nonSelectable">Вопросы<br>и отзывы</td>
+                    <td id="tournaments" class="cpButton cpNormal nonSelectable">Турниры</td>
+                    <td id="bbHistory" class="cpButton cpNormal nonSelectable" onclick="app.client.viewsManager.closeAll();app.client.historyManager.getHistory()">История</td>
+                    <td id="bbRatings" class="cpButton cpNormal nonSelectable" onclick="app.client.viewsManager.closeAll();app.client.ratingManager.getRatings()">Рейтинг</td>
+                    <td id="bbLoginRegister" class="cpButton cpNormal nonSelectable" style="display: none;">Авторизация</td>
+                    <td id="bbProfile" class="cpButton cpNormal nonSelectable">
+                        <span id="bbProfileLabel">Личный<br/>кабинет</span>
+                        <span id="bbUnreadMsgCount"></span>
+                    </td>
+                </tr>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+</div>
+
+<script id="rewind_panel_template" type="text/x-handlebars-template">
+<!--
+    <div class="buttonWrapper buttonWrapper__onTop typeElement typeElement__loaded" style="display: none;">
+        <div class="playManagerButton symbolButton playManagerArrow">
+            <div class="arrowWrapper analyzeButton pressable" data-attr="analyze">Зайти в</br>Свободный режим</div>
+        </div>
+    </div>
+-->
+
+    <div class="buttonWrapper">
+        <div class="playManagerButton playManagerArrow">
+            <div class="arrowWrapper arrowWrapper__start pressable" data-attr="---" title="В начало партии"><div>{{to_start}}</div></div>
+        </div>
+    </div>
+
+    <div class="buttonWrapper">
+        <div class="playManagerButton symbolButton playManagerArrow" style="padding-top: 0px;">
+
+            <div class="arrowWrapper arrowWrapper__left pressable takeforward typeElement typeElement__loaded" style="display:none;" data-attr="--" title="Предыдущая раздача">
+                <div class="rewind_symbol">«</div>
+            </div>
+
+            <div class="arrowWrapper arrowWrapper__left pressable takeback" data-attr="-" title="Предыдущий ход">
+                <div class="rewind_symbol">&larr;</div>
+            </div>
+
+            <div class="arrowWrapper arrowWrapper__play pressable play typeElement typeElement__loaded" data-attr="start/stop" title="Старт/пауза" style="display:none;">
+                <div class="rewind_symbol">&#9658;</div>
+            </div>
+
+            <div class="arrowWrapper arrowWrapper__right pressable takeforward" data-attr="+" title="Следующий ход">
+                <div class="rewind_symbol">&rarr;</div>
+            </div>
+
+            <div class="arrowWrapper arrowWrapper__right pressable takeforward typeElement typeElement__loaded" style="display:none;" data-attr="++" title="Следующая раздача">
+                <div class="rewind_symbol">»</div>
+            </div>
+        </div>
+    </div>
+    <div class="buttonWrapper">
+        <div class="playManagerButton  playManagerArrow">
+    <div class="arrowWrapper arrowWrapper__end pressable" data-attr="+++" title="В конец партии"><div>{{to_end}}</div></div>
+        </div>
+    </div>
+</script><script id="playerTemplate" type="text/x-handlebars-template">
+    <div class="username {{userNameClass}}" attr-username="{{userName}}" attr-userid="{{userId}}" title="{{userNameFull}}">{{userName}}<span class="userrank {{userRankClass}}">{{userRank}}</span></div>
+</script><script id="turnTemplate" type="text/x-handlebars-template">
+    {{turnStatus this}}
+</script><script id="deckTemplate" type="text/x-handlebars-template">
+    <div class="trumpCards">
+        {{#if trumpSuit}}
+        {{#if deckLength}}
+        {{else}}
+        <div class="trumpSuit trumpSuit_{{trumpSuit trump}}"></div>
+        {{/if}}
+
+        {{/if}}
+        <div class="trump">
+            {{#if trumpInDeck}}
+                <div class="card {{cardClass trump}}"></div>
+            {{/if}}
+
+            {{#if showTrumpState}}
+                <div class="trumpState card {{cardClass trump}}"></div>
+            {{/if}}
+        </div>
+    </div>
+    <div class="deckCards">
+        {{#each deck}}
+            <div class="card back"></div>
+        {{/each}}
+    </div>
+
+    {{#if deckLength}}
+        <div class="deckCount">{{deckLength}}</div>
+    {{/if}}
+</script><script id="deckListTemplate" type="text/x-handlebars-template">
+    <div class="card_design_color">
+            {{#if deckLength}}
+                Колода ({{deckLengthWithoutTrump}}):
+                <div class="previewRow">
+                    <div class="handPresetsCards card_design_color">
+                        {{#each deck}}
+                            <div class="handPresetsCard">
+                                <div class="card {{cardClass this}}"></div>
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+            {{/if}}
+
+            <div class="previewRow">
+                Козырь:
+                <div class="handPresetsCards card_design_color">
+                    {{#if trumpInDeck}}
+                        <div class="handPresetsCard"><div class="card {{cardClass trump}}"></div></div>
+                    {{else}}
+                        {{#if trumpSuit}}
+                            {{#if deckLength}}
+                            {{else}}
+                                <div class="trumpSuit trumpSuit_{{trumpSuit trump}}"></div>
+                            {{/if}}
+                        {{/if}}
+                    {{/if}}
+
+                </div>
+            </div>
+    </div>
+</script>
+
+<script id="simpleCardListTemplate" type="text/x-handlebars-template">
+
+                <div class="deckRow {{#if parentClass}}{{parentClass}}{{/if}}" data-property="{{#if parentClass}}{{parentClass}}{{/if}}">
+                    <div class="card_design_color">
+                        {{#each deck}}
+                            <div class="cardHome">
+                                <div class="cardPlace {{#if this}}onBackgroundCardPlace{{/if}}"></div>
+
+                                {{#if this}}
+                                    <div class="card {{cardClass this}}" data-class="{{cardClass this}}"></div>
+                                {{/if}}
+                            </div>
+                        {{/each}}
+                    </div>
+                </div>
+</script>
+
+<script id="deckCreatorTemplate" type="text/x-handlebars-template">
+
+    <div class="dialogHeader">
+        <img class="closeIcon" src="/v6-game-client/app/i/close.png" title="Закрыть диалог">
+    </div>
+
+    <div>
+        <div class="presetCreatorRow">
+                <div class="text">Перетащите карты из колоды в нужный раздел</div>
+                {{{deckCompiled}}}
+                <span class="deckOption shuffleDeck">Перемешать</span>
+            </div>
+            <div class="presetCreatorRow">
+                <div class="columnsWrapper">
+                    <div class="column-first">
+                        <div class="text">Мои карты
+                            <div class="magicTool" title="Заполнить поле картами из колоды" data-property="myDeck"></div>
+                        </div>
+                        {{{slotMyHand}}}
+                    </div>
+                    <div class="column-second">
+                        <div class="text">Карты соперника
+                            <div class="magicTool" title="Заполнить поле картами из колоды" data-property="rivalDeck"></div>
+                        </div>
+                        {{{slotRivalHand}}}
+                    </div>
+                    <div class="column-third">
+                        <div class="text">Козырь
+                            <div class="magicTool" title="Заполнить поле картами из колоды" data-property="trumpCard"></div>
+                        </div>
+                        {{{slotTrump}}}
+                    </div>
+
+                    <div class="switchHandsIcon" title="Поменять карты между игроками"></div>
+                </div>
+                <span class="deckOption dropDeck">Сбросить</span>
+            </div>
+            <div class="presetCreatorRow">
+                <div class="columnsWrapper">
+                    <div class="column-first">
+                        <input type="radio" id="turnFirst1" class="turnFirst" name="turnFirst" value="first" {{#if first}}checked{{/if}}>
+                        <label for="turnFirst1">Ходить первым</label>
+                    </div>
+                    <div class="column-second">
+                        <input type="radio" id="turnFirst2" class="turnFirst" name="turnFirst" value="second" {{#if first}}{{else}}checked{{/if}}>
+                        <label for="turnFirst2">Ходить вторым</label>
+                    </div>
+                    <div class="column-third"></div>
+                </div>
+            </div>
+            <div class="presetCreatorRow">
+                <input class="presetTitle" type="text" name="" placeholder="Название расклада" value="{{title}}"/>
+            </div>
+            <div style="height: 20px;"><div class="errorOnFormMessage"></div></div>
+    </div>
+
+    
+
+</script>
+
+<script id="cardPlaceTemplate" type="text/x-handlebars-template">
+    <div class="cardPlace"></div>
+</script><script id="handTemplate" type="text/x-handlebars-template">
+    <div class="handCards handCards_{{i}} {{#cardsNumber counter}}{{/cardsNumber}}">
+
+            <div class="handCounter {{#if counter}}visibleCounter{{/if}} " style="left: {{counterOffsetLeft}}px">{{counter}}</div>
+
+        {{#if openHand}}
+            {{#each cards}}
+                <div class="handCard card {{__class}}
+                    {{cardClass this ../this}}"
+                     data-suit="{{attributes.suit}}"
+                     data-value="{{attributes.value}}"
+                     data-left="{{__leftOffset}}"
+                     style="left: {{__leftOffset}}px; z-index: {{@index}};"></div>
+            {{/each}}
+        {{else}}
+            {{#each cards}}
+                <div class="handCard card
+                     {{cardClass this ../this}}"
+                     data-left="{{__leftOffset}}"
+                     style="left: {{__leftOffset}}px"></div>
+            {{/each}}
+        {{/if}}
+    </div>
+</script><script id="tableTemplate" type="text/x-handlebars-template">
+    <div class="tableCards tableCards_{{firstPlayerIndex}} compactView_{{compactView}} {{#if twoColumnView}}twoColumnView{{/if}}">
+    {{#each deck}}
+        <div class="tableCard">
+            <div class="card {{cardClass this}} {{#if inPile}}inPile{{/if}}"></div>
+            {{#ifHasCardOver attributes}}{{/ifHasCardOver}}
+        </div>
+    {{/each}}
+
+
+        <div class="" style="position: absolute;
+            bottom: 0px;
+            font-size: 80%;
+            margin-left: 15px;">
+            {{#if text}}
+                {{text}}
+            {{/if}}
+        </div>
+    </div>
+</script><script id="pileTemplate" type="text/x-handlebars-template">
+    {{#each cards}}
+        <div class="pileCard card back suit_{{attributes.suit}}"></div>
+    {{/each}}
+</script><script id="buttonTemplate" type="text/x-handlebars-template">
+    {{#each buttons}}
+        <button class="playerButton" data-id="{{id}}" data-card-class="{{data_card_class}}">{{{text}}}</button>
+    {{/each}}
+</script><script id="menuTopTemplate" type="text/x-handlebars-template">
+    <div class="menuWrapper">
+        <div class="computer">
+            <ul style="font-weight: bold;">
+                <li data-mode="default" class="cpButton cpNormal nonSelectable gameMode activeSelector">{{{mode_default}}}</li>
+                <li data-mode="transferable" class="cpButton cpNormal nonSelectable gameMode">{{{mode_transferable}}}</li>
+                <li data-mode="deck_52" class="cpButton cpNormal nonSelectable gameMode">{{{mode_52}}}</li>
+                <li class="cpButton cpNormal nonSelectable" onclick="window.location.href='/'">{{{otherGames}}}</li>
+                <ul class="secondRow" style="margin-top:2px;">
+                    <li class="cpButton cpNormal nonSelectable disable giveUp">{{{giveUp}}}</li>
+                    <li class="cpButton cpNormal nonSelectable disable">{{{offerDraw}}}</li>
+                    <li class="cpButton cpNormal nonSelectable" onclick="app.game.newGameComputer();">{{{newGame}}}</li>
+                </ul>
+            </ul>
+
+        </div>
+
+        <div class="multiplayer" style="display:none;">
+            <ul style="font-weight: bold;">
+                <li data-mode="default" class="cpButton cpNormal nonSelectable gameMode activeSelector">{{{mode_default}}}</li>
+                <li data-mode="transferable" class="cpButton cpNormal nonSelectable gameMode">{{{mode_transferable}}}</li>
+                <li data-mode="deck_52" class="cpButton cpNormal nonSelectable gameMode">{{{mode_52}}}</li>
+                <li class="cpButton cpNormal nonSelectable" onclick="window.location.href='/'">{{{otherGames}}}</li>
+                <ul class="secondRow" style="margin-top:2px;">
+                    <li class="cpButton cpNormal nonSelectable" onclick="app.client.gameManager.sendThrow()">{{{giveUp}}}</li>
+                    <li class="cpButton cpNormal nonSelectable" onclick="app.client.gameManager.sendDraw();">{{{offerDraw}}}</li>
+                    <li class="cpButton cpNormal nonSelectable" onclick="app.client.gameManager.leaveGame()">{{{leaveGame}}}</li>
+                </ul>
+            </ul>
+
+        </div>
+
+        <div class="loaded" style="display:none;">
+            <ul style="font-weight: bold;">
+                <li data-mode="default" class="cpButton cpNormal nonSelectable gameMode activeSelector">{{{mode_default}}}</li>
+                <li data-mode="transferable" class="cpButton cpNormal nonSelectable gameMode">{{{mode_transferable}}}</li>
+                <li data-mode="deck_52" class="cpButton cpNormal nonSelectable gameMode">{{{mode_52}}}</li>
+                <li class="cpButton cpNormal nonSelectable" onclick="window.location.href='/'">{{{otherGames}}}</li>
+                <ul class="secondRow" style="margin-top:2px;">
+                    <li class="cpButton cpNormal nonSelectable disable">{{{giveUp}}}</li>
+                    <li class="cpButton cpNormal nonSelectable disable">{{{offerDraw}}}</li>
+                    <li class="cpButton cpNormal nonSelectable" onclick="app.game.newGameComputer();">{{{newGame}}}</li>
+                </ul>
+            </ul>
+        </div>
+
+        <div class="spectator" style="display:none;">
+            <ul style="font-weight: bold;">
+                <li data-mode="default" class="cpButton cpNormal nonSelectable gameMode activeSelector">{{{mode_default}}}</li>
+                <li data-mode="transferable" class="cpButton cpNormal nonSelectable gameMode">{{{mode_transferable}}}</li>
+                <li data-mode="deck_52" class="cpButton cpNormal nonSelectable gameMode">{{{mode_52}}}</li>
+                <li class="cpButton cpNormal nonSelectable" onclick="window.location.href='/'">{{{otherGames}}}</li>
+                <ul class="secondRow" style="margin-top:2px;">
+                    <li class="cpButton cpNormal nonSelectable disable">{{{giveUp}}}</li>
+                    <li class="cpButton cpNormal nonSelectable disable">{{{offerDraw}}}</li>
+                    <li class="cpButton cpNormal nonSelectable" onclick="app.client.gameManager.leaveGame()">{{{leaveGame}}}</li>
+                </ul>
+            </ul>
+        </div>
+    </div>
+</script><script id="menuBottomTemplate" type="text/x-handlebars-template">
+    <tr>
+        <td id="bbParameters" class="cpButton cpNormal nonSelectable" onclick="app.client.viewsManager.closeAll();app.client.viewsManager.showSettings();">{{{menuSettings}}}</td>
+        <td id="bbHistory" class="cpButton cpNormbl nonSelectable" onclick="app.client.viewsManager.closeAll();app.client.historyManager.getHistory()">{{{menuHistory}}}</td>
+        <td id="bbHistory" class="cpButton cpNormal nonSelectable" onclick="app.client.viewsManager.closeAll();app.client.historyManager.getHistory()">{{{menuHistory}}}</td>
+        <td id="bbRatings" class="cpButton cpNormal nonSelectable" onclick="app.client.viewsManager.closeAll();app.client.ratingManager.getRatings()">{{{menuRating}}}</td>
+        <td id="bbLoginRegister" class="cpButton cpNormal nonSelectable" style="display: none;"> {{{menuAuth}}}</td>
+        <td id="bbProfile" class="cpButton cpNormal nonSelectable">
+            <span id="bbProfileLabel">{{{menuProfile}}}</span>
+            <span id="bbUnreadMsgCount"></span>
+        </td>
+    </tr>
+</script><script id="helloScreenTemplate" type="text/x-handlebars-template">
+    <div class="helloScreenPlayWithComputer">
+        <div>
+            <div class="helloScreenTitle">
+                {{{title}}} <span class="helloScreenTitleMode">подкидной</span>
+            </div>
+            {{{helloScreen1}}} 
+            <span style="border-bottom: 1px solid white;cursor: pointer;" onclick="app.game.newGameComputer();">{{{helloScreen2}}}</span></div>
+    </div>
+    <div class="tournamentPreview"></div>
+</script><script id="analysisButton_template" type="text/x-handlebars-template">
+    <div class="playManagerButton symbolButton playManagerArrow">
+        <div class="arrowWrapper analyzeButton pressable" data-attr="analyze">{{buttonAnalysis}}</div>
+    </div>
+</script>
+
+
+<script id="saveComputerGameButton_template" type="text/x-handlebars-template">
+    <div class="playManagerButton symbolButton playManagerArrow">
+        <div class="arrowWrapper saveCompGameButton pressable">{{text}}</div>
+    </div>
+</script>
+<script id="ingame_buttons_panel_template" type="text/x-handlebars-template">
+    <div style="border: 1px solid #ccc;border-radius: 3px;">
+        <div class="playManagerButton  playManagerArrow eye eye_NotShow">
+            Открыть<br/>свои карты
+        </div>
+    </div>
+</script><script id="historyRowTemplate" type="text/x-handlebars-template">
+    <tr class="result_{{result}}">
+        <td>{{index}}</td>
+        <td>{{score}}</td>
+        <td>{{text}}</td>
+    </tr>
+</script><script id="myPresetsTemplate" type="text/x-handlebars-template">
+    <div class="handPresetsRow card_design_color {{presetType}} {{#if isCurrentId}}selected{{/if}}" data-id="{{id}}" >
+
+    <div class="handPresetPreview">
+        <div class="previewData">
+            <div class="previewRow">
+                Мои карты:
+                <div class="handPresetsCards card_design_color {{#if first}} first {{/if}}">
+                    {{#each myCards}}
+                        <div class="handPresetsCard"><div class="card {{this}}"></div></div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="previewRow">
+                Карты соперника:
+                <div class="handPresetsCards card_design_color {{#if first}} '' {{else}} first {{/if}}">
+                    {{#each rivalCards}}
+                        <div class="handPresetsCard"><div class="card {{this}}"></div></div>
+                    {{/each}}
+                </div>
+            </div>
+
+            <div class="previewRow">
+                Козырь:
+                <div class="handPresetsCards card_design_color">
+                    <div class="handPresetsCard"><div class="card {{trump}}"></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="handPresetsDetails">
+        <div class="presetTitleText"><span class="buttonPreview">{{text}}</span></div>
+
+        <div style="float: right">
+
+            <div class="presetOption presetOptionFirstTurn" title="Ходить первым / Ходить вторым">
+                <span>{{#if first}}1{{else}}2{{/if}}</span>
+            </div>
+
+            <div class="presetOption presetOptionEdit" title="Изменить расклад">
+                <div class="editIcon"></div>
+            </div>
+
+            <div class="presetOption presetOptionDelete" title="Удалить расклад">
+                <div class="deleteIcon"></div>
+            </div>
+            
+        </div>
+    </div>
+
+</div>
+</script>
+
+<script id="handPresetsTemplate" type="text/x-handlebars-template">
+    {{#if isCurrentId}}
+        <div class="handPresetsRow card_design_color selected" data-id="{{id}}">
+    {{else}}
+        <div class="handPresetsRow card_design_color" data-id="{{id}}">
+    {{/if}}
+
+        <div class="handPresetPreview">
+            <div class="previewData">
+                <div class="previewRow">
+                    Мои карты:
+                    <div class="handPresetsCards card_design_color {{#if first}} first {{/if}}">
+                        {{#each myCards}}
+                            <div class="handPresetsCard"><div class="card {{this}}"></div></div>
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="previewRow">
+                    Карты соперника:
+                    <div class="handPresetsCards card_design_color {{#if first}} '' {{else}} first {{/if}}">
+                        {{#each rivalCards}}
+                            <div class="handPresetsCard"><div class="card {{this}}"></div></div>
+                        {{/each}}
+                    </div>
+                </div>
+
+                <div class="previewRow">
+                    Козырь:
+                    <div class="handPresetsCards card_design_color">
+                        <div class="handPresetsCard"><div class="card {{trump}}"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="handPresetsDetails">
+            <div class="col">
+                <span class="buttonPreview">{{text}}</span>
+            </div>
+            <div class="col">
+                <span class="resultsAll" title="Количество побед">
+                    {{userStats.wins}}
+                </span>
+                /<span class="resultsAll" title="Суммарное количество партий">
+                        {{userStats.games}}
+                </span>
+            </div>
+            <div class="col">
+                {{percentWinAll}}&nbsp
+                (<span class="resultsAll" title="Суммарное количество партий">
+                    {{totalStats.games}}
+                </span>)
+            </div>
+        </div>
+
+    </div>
+</script>
+
+<script id="handPresetsHeader" type="text/x-handlebars-template">
+    <div class="header">
+        <!--<img src="/v6-game-client/app/i/sort-asc.png">-->
+        <!--<img src="/v6-game-client/app/i/sort-asc.png">-->
+        <!--<img src="/v6-game-client/app/i/sort-both.png">-->
+
+        {{#each cols}}
+            <div class="col col_{{@index}}" title="{{title}}" data-col="{{value}}">
+                <div>{{text}}</div>
+                <div class="sorting">
+                    {{#if sorting}}
+                        <img src="/v6-game-client/app/i/sort-{{sorting}}.png">
+                    {{else}}
+                        <img src="/v6-game-client/app/i/sort-both.png">
+                    {{/if}}
+                </div>
+            </div>
+        {{/each}}
+    </div>
+</script>
+
+<script id="handPresetsNoData" type="text/x-handlebars-template">
+    <div class="noData">
+        Для данного режима игры расклады отсутствуют
+    </div>
+</script>
+
+<script id="handPresetsLoading" type="text/x-handlebars-template">
+    <div class="noData">
+        Загрузка...
+    </div>
+</script><script id="settingsTemplate" type="text/x-handlebars-template">
+    <div id="__settings_template" >
+
+        <div style="display:inline-block;">
+            <p>{{cardSuitTitle}}</p>
+
+            <div class="option">
+                <label>
+                    <input type="radio" name="card_design" value="base">
+                    {{cardSuitDefault}}
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="card_design" value="simple">
+                    {{cardSuitMinimal}}
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="card_design" value="color">
+                    {{cardSuit4Colored}}
+                </label>
+            </div>
+        </div>
+
+        <div style="position: absolute;display: inline-block;left: 180px;">
+            <p>{{cardBackTitle}}</p>
+            <div class="option">
+                <label>
+                    <input type="radio" name="back_image" value="checkered_1">
+                    {{cardBackPlaid}}
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="back_image" value="gradient_3">
+                    {{cardBackGradient}}
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="back_image" value="back">
+                    {{cardBackDefault}}
+                </label>
+            </div>
+        </div>
+
+        <div style="position: absolute;display: inline-block;left: 340px;">
+            <p>{{cardWidthTitle}}</p>
+            <div class="option">
+                <label>
+                    <input type="radio" name="card_width" value="standard">
+                    {{cardWidthDefault}}
+                </label>
+                <br>
+                <label>
+                    <input type="radio" name="card_width" value="big">
+                    {{cardWidthIncreased}}
+                </label>
+            </div>
+        </div>
+
+    <p>{{cardSortTitle}}</p>
+
+    <div class="option">
+        <label>
+            <input type="radio" name="sort" value="without">
+            {{cardSortNoSort}}
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="sort" value="by_suit">
+            {{cardSortBySuit}}
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="sort" value="by_value">
+            {{cardSortByValue}}
+        </label>
+        <br>
+        <label>
+            <input type="radio" name="sort" value="by_value_trump_to_right">
+            {{cardSortByValueWithTrump}}
+        </label>
+    </div>
+
+
+    <div>
+        <div style="display: inline-block;vertical-align: top;">
+            <p>{{suitForTrumpTitle}}</p>
+            <div>
+                <label style="display: inline">
+                    <input type="radio" name="trump_mapping" value="without">
+                    {{suitForTrumpDefault}}
+                </label>
+                <br>
+                <label style="display: inline">
+                    <input type="radio" name="trump_mapping" value="s">
+                    {{suitForTrumpSpades}}
+                </label>
+                <br>
+                <label style="display: inline">
+                    <input type="radio" name="trump_mapping" value="d">
+                    {{suitForTrumpDiamonds}}
+                </label>
+                <br>
+                <label style="display: inline">
+                    <input type="radio" name="trump_mapping" value="c">
+                    {{suitForTrumpClubs}}
+                </label>
+                <br>
+                <label style="display: inline">
+                    <input type="radio" name="trump_mapping" value="h">
+                    {{suitForTrumpHearts}}
+                </label>
+            </div>
+        </div>
+        <div class="settingsSecondRow">
+            <p>{{turnHighlightTitle}}</p>
+            <label style="display: inline">
+                <input type="radio" name="possible_move_style" value="highlight">
+                {{turnHighlightDefault}}
+            </label>
+            <br>
+            <label style="display: inline">
+                <input type="radio" name="possible_move_style" value="pull_out">
+                {{turnHighlightAll}}
+            </label>
+            <br>
+            <label style="display: inline">
+                <input type="radio" name="possible_move_style" value="pull_out_no_trump">
+                {{turnHighlightAllNoTrump}}
+            </label>
+        </div>
+    </div>
+
+    <div>
+        <div style="display: inline-block;vertical-align: top;">
+            <p>{{gameSettingsTitle}}</p>
+            <div>
+                <div style="display: none;">
+                    <label>
+                        <input type="radio" name="step" value="click">
+                        Ход одинарным кликом
+                    </label>
+                    <label>
+                        <input type="radio" name="step" value="dblclick">
+                        Ход двойным кликом
+                    </label>
+                </div>
+                <div class="option">
+                    <label><input type="checkbox" name="sounds">{{gameSettingsSound}}</label>
+                </div>
+
+                <div class="option"><label><input type="checkbox" name="wrapped">{{panelsCloser}}</label></div>
+                <div class="option"><label><input type="checkbox" name="hideAdvertising">{{hideAds}}</label></div>
+            </div>
+        </div>
+
+        <div class="settingsSecondRow">
+            <p>{{defaultModeTitle}}</p>
+            <label><input type="radio" name="defaultMode" value="default">{{menuModeDefault}}</label> <br/>
+            <label><input type="radio" name="defaultMode" value="transferable">{{menuModeTransferable}}</label> <br/>
+            <label><input type="radio" name="defaultMode" value="deck_52">{{menuMode52}}</label> <br/>
+        </div>
+    </div>
+
+    <div>
+        <p>{{gameSettingsInvite}}</p>
+        <label><input type="checkbox" name="disableInvites_default">{{disableDefault}}</label><br>
+        <label><input type="checkbox" name="disableInvites_transferable">{{disableTransferable}}</label><br>
+        <label><input type="checkbox" name="disableInvites_deck_52">{{disable52}}</label><br>
+        <label><input type="checkbox" name="disableOtherModesInvite">{{{disableAnother}}}</label><br>
+        <label><input type="checkbox" name="disableInvite">{{{disableAll}}}</label>
+    </div>
+</div>
+
+    </script>
+
+<!--<script src="lib/velocity.min.js"></script>-->
+<script src="src/lib/bluebird.min.js"></script>
+<script src="src/lib/handlebars-v4.0.11.js"></script>
+
+<script src="build/bundle.js?v=_2.6.4"></script>
+
+                </div>
+                <div id="under-field">
+                    <a class="switchLocale" href="?lang=en">en</a>
+
+<!--google translator-->
+<!--link: #googtrans(ru|en). -->
+<!--for no translate class="notranslate" -->
+<!-- 
+<div class="switchLocaleGoogle">
+    <div id="google_translate_element"></div>
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'ru',
+                layout: google.translate.TranslateElement.FloatPosition.BOTTOM_RIGHT,
+                multilanguagePage: true
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript"
+            src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+</div>
+-->
+                </div>
+            </div>
+            <div id="right-block" >
+                <div id="right">
+    
+    <!--
+    <div class="history typeElement typeElement__multiplayer" style="display:none;">
+
+        <table>
+            <thead>
+                <tr>
+                    <td>№</td>
+                    <td>Счет</td>
+                    <td>Статус</td>
+                </tr>
+            </thead>
+            <tbody>
+
+            </tbody>
+        </table>
+    </div>
+
+    <div class="history">
+            <table>
+                <thead>
+                    <tr>
+                        <td>№</td>
+                        <td>heap</td>
+                        <td>Оскар</td>
+                    </tr>
+                </thead>
+                <tbody>
+
+
+                 <tr class="result_draw">
+                    <td>758</td>
+                    <td>0</td>
+                    <td>0</td>
+                </tr>
+                <tr class="result_win">
+                    <td>759</td>
+                    <td>1</td>
+                    <td>0</td>
+                </tr>
+                <tr class="result_lose">
+                    <td>760</td>
+                    <td>1</td>
+                    <td>1</td>
+                </tr>
+                <tr class="result_lose">
+                    <td>761</td>
+                    <td>1</td>
+                    <td>2</td>
+                </tr>
+                <tr class="result_win">
+                    <td>762</td>
+                    <td>2</td>
+                    <td>2</td>
+                </tr>
+                <tr class="result_win">
+                    <td>763</td>
+                    <td>3</td>
+                    <td>2</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        -->
+</div>            </div>
+        </did>
+    </div>
+    <div id="bottom-block" >
+        <!-- profile panel -->
+<div class="bubblePanel bottomSubPanel bottomPanel _hackPaddingLayer" id="profilePanel" style="display: none">
+    <div id="profileMainTab">
+        <img id="profileCloseImg" src="/img/icons/icon_close.png" alt="Закрыть"/>
+
+        <div class="historyTitle">Личный кабинет</div>
+
+        <div id="profileLoading"
+             style="padding-top: 20px; padding-left:20px; height:35px; font-family: Verdana; font-weight: bold;">
+            <span style="float: left; color:#444444;">Загрузка...&nbsp;</span>
+            <img style="float: left; margin-top: -10px;" src="/img/icons/loading.gif">
+        </div>
+
+        <div id="profileContents" style="display: none;">
+            <div style='float: left;'>
+                <h4>Ваш личный кабинет (&laquo;<span id='profileUsername'></span>&raquo;)</h4>
+            </div>
+            <img src="/img/icons/loading.gif" class="profileLoadingIcon" id="profileLoadingIcon">
+
+            <div class="clear"></div>
+
+            <table>
+                <tr>
+                    <td width="1%" style="vertical-align: top;">
+                        <div id="profilePhoto"
+                             style="float: left; padding-top: 10px; padding-right: 10px; width: 135px;">
+                            <div class="profilePhotoFrame" id="profilePhotoFrame">
+                                <img src="/images/nophoto.jpg" class="profilePhoto"
+                                     alt="Фото не загружено"/>
+                            </div>
+                        </div>
+                    </td>
+                    <td style="vertical-align: top;">
+                        <div id="profileData" style="float: left; padding-top: 3px;">
+                            <table id="profilePIStaticLayout">
+                                <tr>
+                                    <td>
+                                        <div id="profilePIStatic"></div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <div id="profileEditBtn" class="constantWidthBtn nonSelectable"
+                                             style="margin-left: 0px;">Редактировать профиль                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                            <div id="profilePIEditable">
+                                <form id="profileForm" method="post" enctype="multipart/form-data"
+                                      action="/gw/profile/updateProfile.php">
+                                    <table>
+                                        <tr>
+                                            <td>День рождения:</td>
+                                            <td>
+                                                <table style="width: 100%" cellspacing="0" cellpadding="0">
+                                                    <tr>
+                                                        <td style='text-align: left;'>
+                                                            <select name="birthDay" id="profileBirthDay"
+                                                                    class="profileShortField">
+                                                                <option value='0'>—</option>
+                                                                <option value='1'>1</option><option value='2'>2</option><option value='3'>3</option><option value='4'>4</option><option value='5'>5</option><option value='6'>6</option><option value='7'>7</option><option value='8'>8</option><option value='9'>9</option><option value='10'>10</option><option value='11'>11</option><option value='12'>12</option><option value='13'>13</option><option value='14'>14</option><option value='15'>15</option><option value='16'>16</option><option value='17'>17</option><option value='18'>18</option><option value='19'>19</option><option value='20'>20</option><option value='21'>21</option><option value='22'>22</option><option value='23'>23</option><option value='24'>24</option><option value='25'>25</option><option value='26'>26</option><option value='27'>27</option><option value='28'>28</option><option value='29'>29</option><option value='30'>30</option><option value='31'>31</option>                                                            </select>
+                                                        </td>
+                                                        <td style='text-align: center;'>
+                                                            <select name="birthMonth" id="profileBirthMonth"
+                                                                    class="profileShortField">
+                                                                <option value='0'>—</option>
+                                                                <option value='1'>января</option><option value='2'>февраля</option><option value='3'>марта</option><option value='4'>апреля</option><option value='5'>мая</option><option value='6'>июня</option><option value='7'>июля</option><option value='8'>августа</option><option value='9'>сентября</option><option value='10'>октября</option><option value='11'>ноября</option><option value='12'>декабря</option>                                                            </select>
+                                                        </td>
+                                                        <td style='text-align: right;'>
+                                                            <select name="birthYear" id="profileBirthYear"
+                                                                    class="profileShortField">
+                                                                <option value='0'>—</option>
+                                                                
+                                                                <option value='2019'>2019</option>
+                                                                
+                                                                <option value='2018'>2018</option>
+                                                                
+                                                                <option value='2017'>2017</option>
+                                                                
+                                                                <option value='2016'>2016</option>
+                                                                
+                                                                <option value='2015'>2015</option>
+                                                                
+                                                                <option value='2014'>2014</option>
+                                                                
+                                                                <option value='2013'>2013</option>
+                                                                
+                                                                <option value='2012'>2012</option>
+                                                                
+                                                                <option value='2011'>2011</option>
+                                                                
+                                                                <option value='2010'>2010</option>
+                                                                
+                                                                <option value='2009'>2009</option>
+                                                                
+                                                                <option value='2008'>2008</option>
+                                                                
+                                                                <option value='2007'>2007</option>
+                                                                
+                                                                <option value='2006'>2006</option>
+                                                                
+                                                                <option value='2005'>2005</option>
+                                                                
+                                                                <option value='2004'>2004</option>
+                                                                
+                                                                <option value='2003'>2003</option>
+                                                                
+                                                                <option value='2002'>2002</option>
+                                                                
+                                                                <option value='2001'>2001</option>
+                                                                
+                                                                <option value='2000'>2000</option>
+                                                                
+                                                                <option value='1999'>1999</option>
+                                                                
+                                                                <option value='1998'>1998</option>
+                                                                
+                                                                <option value='1997'>1997</option>
+                                                                
+                                                                <option value='1996'>1996</option>
+                                                                
+                                                                <option value='1995'>1995</option>
+                                                                
+                                                                <option value='1994'>1994</option>
+                                                                
+                                                                <option value='1993'>1993</option>
+                                                                
+                                                                <option value='1992'>1992</option>
+                                                                
+                                                                <option value='1991'>1991</option>
+                                                                
+                                                                <option value='1990'>1990</option>
+                                                                
+                                                                <option value='1989'>1989</option>
+                                                                
+                                                                <option value='1988'>1988</option>
+                                                                
+                                                                <option value='1987'>1987</option>
+                                                                
+                                                                <option value='1986'>1986</option>
+                                                                
+                                                                <option value='1985'>1985</option>
+                                                                
+                                                                <option value='1984'>1984</option>
+                                                                
+                                                                <option value='1983'>1983</option>
+                                                                
+                                                                <option value='1982'>1982</option>
+                                                                
+                                                                <option value='1981'>1981</option>
+                                                                
+                                                                <option value='1980'>1980</option>
+                                                                
+                                                                <option value='1979'>1979</option>
+                                                                
+                                                                <option value='1978'>1978</option>
+                                                                
+                                                                <option value='1977'>1977</option>
+                                                                
+                                                                <option value='1976'>1976</option>
+                                                                
+                                                                <option value='1975'>1975</option>
+                                                                
+                                                                <option value='1974'>1974</option>
+                                                                
+                                                                <option value='1973'>1973</option>
+                                                                
+                                                                <option value='1972'>1972</option>
+                                                                
+                                                                <option value='1971'>1971</option>
+                                                                
+                                                                <option value='1970'>1970</option>
+                                                                
+                                                                <option value='1969'>1969</option>
+                                                                
+                                                                <option value='1968'>1968</option>
+                                                                
+                                                                <option value='1967'>1967</option>
+                                                                
+                                                                <option value='1966'>1966</option>
+                                                                
+                                                                <option value='1965'>1965</option>
+                                                                
+                                                                <option value='1964'>1964</option>
+                                                                
+                                                                <option value='1963'>1963</option>
+                                                                
+                                                                <option value='1962'>1962</option>
+                                                                
+                                                                <option value='1961'>1961</option>
+                                                                
+                                                                <option value='1960'>1960</option>
+                                                                
+                                                                <option value='1959'>1959</option>
+                                                                
+                                                                <option value='1958'>1958</option>
+                                                                
+                                                                <option value='1957'>1957</option>
+                                                                
+                                                                <option value='1956'>1956</option>
+                                                                
+                                                                <option value='1955'>1955</option>
+                                                                
+                                                                <option value='1954'>1954</option>
+                                                                
+                                                                <option value='1953'>1953</option>
+                                                                
+                                                                <option value='1952'>1952</option>
+                                                                
+                                                                <option value='1951'>1951</option>
+                                                                
+                                                                <option value='1950'>1950</option>
+                                                                
+                                                                <option value='1949'>1949</option>
+                                                                
+                                                                <option value='1948'>1948</option>
+                                                                
+                                                                <option value='1947'>1947</option>
+                                                                
+                                                                <option value='1946'>1946</option>
+                                                                
+                                                                <option value='1945'>1945</option>
+                                                                
+                                                                <option value='1944'>1944</option>
+                                                                
+                                                                <option value='1943'>1943</option>
+                                                                
+                                                                <option value='1942'>1942</option>
+                                                                
+                                                                <option value='1941'>1941</option>
+                                                                
+                                                                <option value='1940'>1940</option>
+                                                                
+                                                                <option value='1939'>1939</option>
+                                                                
+                                                                <option value='1938'>1938</option>
+                                                                
+                                                                <option value='1937'>1937</option>
+                                                                
+                                                                <option value='1936'>1936</option>
+                                                                
+                                                                <option value='1935'>1935</option>
+                                                                
+                                                                <option value='1934'>1934</option>
+                                                                
+                                                                <option value='1933'>1933</option>
+                                                                
+                                                                <option value='1932'>1932</option>
+                                                                
+                                                                <option value='1931'>1931</option>
+                                                                
+                                                                <option value='1930'>1930</option>
+                                                                
+                                                                <option value='1929'>1929</option>
+                                                                
+                                                                <option value='1928'>1928</option>
+                                                                
+                                                                <option value='1927'>1927</option>
+                                                                
+                                                                <option value='1926'>1926</option>
+                                                                
+                                                                <option value='1925'>1925</option>
+                                                                
+                                                                <option value='1924'>1924</option>
+                                                                
+                                                                <option value='1923'>1923</option>
+                                                                
+                                                                <option value='1922'>1922</option>
+                                                                
+                                                                <option value='1921'>1921</option>
+                                                                
+                                                                <option value='1920'>1920</option>
+                                                                
+                                                                <option value='1919'>1919</option>
+                                                                
+                                                                <option value='1918'>1918</option>
+                                                                
+                                                                <option value='1917'>1917</option>
+                                                                
+                                                                <option value='1916'>1916</option>
+                                                                
+                                                                <option value='1915'>1915</option>
+                                                                
+                                                                <option value='1914'>1914</option>
+                                                                
+                                                                <option value='1913'>1913</option>
+                                                                
+                                                                <option value='1912'>1912</option>
+                                                                
+                                                                <option value='1911'>1911</option>
+                                                                
+                                                                <option value='1910'>1910</option>
+                                                                
+                                                                <option value='1909'>1909</option>
+                                                                
+                                                                <option value='1908'>1908</option>
+                                                                
+                                                                <option value='1907'>1907</option>
+                                                                
+                                                                <option value='1906'>1906</option>
+                                                                
+                                                                <option value='1905'>1905</option>
+                                                                
+                                                                <option value='1904'>1904</option>
+                                                                
+                                                                <option value='1903'>1903</option>
+                                                                
+                                                                <option value='1902'>1902</option>
+                                                                
+                                                                <option value='1901'>1901</option>
+                                                                
+                                                                <option value='1900'>1900</option>
+                                                                                                                            </select>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Город:</td>
+                                            <td>
+                                                <input name="where" id="profileWhere" type="text" class="profileField"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Ссылка в соц-сети:</td>
+                                            <td>
+                                                <input name="link" id="profileLink" type="text" class="profileField"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td title = "Для восстановления пароля">Электронная почта:</td>
+                                            <td title = "Для восстановления пароля">
+                                                <input name="mail" id="profileMail" type="email" class="profileField"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>О себе:</td>
+                                            <td>
+                                                <textarea name="about" id="profileAbout" type="text"
+                                                          class="profileField"></textarea>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>Фото:</td>
+                                            <td>
+                                                <input id="profilePhotoField" name="photo" type="file" size="33"
+                                                       class="profileField"/>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2">
+                                                <div class="profileCP">
+                                                    <div id="profileSaveBtn" class="constantWidthBtn nonSelectable"
+                                                         style="margin-left: 0px;">
+                                                        Сохранить                                                    </div>
+                                                    <div id="profileDiscardChangesBtn"
+                                                         class="constantWidthBtn nonSelectable"
+                                                         style="margin-left: 0px;">
+                                                        Отмена                                                    </div>
+                                                    <img id="profileLoadingImg" src="/img/icons/loading.gif"/>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </form>
+                            </div>
+                        </div>
+                        <div style="padding-top:15px; padding-left: 3px; clear: both;">
+                            <div style="display: block; padding-bottom: 15px;">
+                                <!--<input type="checkbox" id="profileGoInvisible">-->
+                                <img id="profileGoInvisibleLoadingImg" src="/img/icons/loading_transparent.gif"
+                                     style="width: 14px; padding-left: 5px; display: none;" alt=""/>
+                            </div>
+                            <span class="bspTopHeader" id="profileGoToInbox">
+                                Посмотреть личные сообщения                            </span>
+                            <div class="bspTopHeader" id="profileUnreadMsgAlert">
+                                <span id='profileReadMsgBtn'>: 1</span>
+                            </div>
+                            <span class="bspTopHeader" id="sendToAdmin">
+                                Написать админу                            </span>
+                            <span class="bspTopHeader" id="changePassword">
+                                Изменить пароль                            </span>
+                        </div>
+                        <div id="profileSideActivity"></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div class="clear"></div>
+            <div class="profileLogoutPanel">
+                <div style="margin-top: 20px; padding-top: 5px; border-top: 1px dashed rgb(204, 204, 204); display: block;">
+                    <span class="bspAuxBtn" style="float: left;" id="profileLogoutBtn">[Сменить профиль]</span>
+                    <!--<span class="bspAuxBtn" style="float: right;" id="shareBtn">[Рекомендовать игру в соц. сетях]</span>-->
+                </div>
+                <div class="clear"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="profileSubTab">
+    </div>
+</div>
+<!-- end of profile panel --><div class="bubblePanel bottomSubPanel bottomPanel _hackPaddingLayer" id="guestBookPanel">
+    <img id="gbLoadingIcon" class="loadingIcon" src="/img/icons/loading.gif" alt="Загрузка"/> 
+    <img id="gbCloseIcon" class="closePanelIcon" src="/img/icons/icon_close.png"
+         alt="Закрыть"/>
+    <a href="https://vk.com/logicgamesgroup" target="blank" class="gbVkGroupIcon">
+		<img src="/img/icons/vk_logo_small.png" title="наша группа в вконтакте" />
+	</a>
+
+    <div id="gbContents"></div>
+</div><div id="v6_bottom_wrapper"></div>        <div id="info-block">
+            <script type="text/javascript">
+    console.log('baner', "fool1", "281");
+    $(document).on('ready', function(){
+        if (getCookie('hide_banner')){
+            $('.lg-banner').hide();
+            $('#lg-activity-container').show();
+        } else {
+            $('#lg-close-banner').on('click', function() {
+                var now = new Date(),
+                    time = now.getTime(),
+                    expireTime = time + 1000*3600*6;
+                now.setTime(expireTime);
+                setCookie('hide_banner', true, now, '/');
+            })
+        }
+        if (getCookie('hide_vk_group')){
+            $('.lg-vkgroup').hide();
+        } else {
+            $('.lg-vkgroup span').on('click', function() {
+                var now = new Date(),
+                    time = now.getTime(),
+                    expireTime = time + 1000*3600*6;
+                now.setTime(expireTime);
+                setCookie('hide_vk_group', true, now, '/');
+            })
+        }
+    });
+</script>
+
+
+<div id="lg-activity-container" >
+    <div id="vstats">
+        <p>
+            Всего уникальных посетителей — вчера: 3417, сегодня: 2888        </p>
+    </div>
+    <div id="copyright">&copy;
+        Программный продукт <a href="http://v6.spb.ru/" target="_blank">Юридического центра &laquo;Восстания-6&raquo;</a>    </div>
+</div>
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function (d, w, c) {
+        (w[c] = w[c] || []).push(function() {
+            try {
+                w.yaCounter20303959 = new Ya.Metrika({id:20303959,
+                    webvisor:true,
+                    clickmap:true,
+                    trackLinks:true,
+                    accurateTrackBounce:true});
+            } catch(e) { }
+        });
+
+        var n = d.getElementsByTagName("script")[0],
+            s = d.createElement("script"),
+            f = function () { n.parentNode.insertBefore(s, n); };
+        s.type = "text/javascript";
+        s.async = true;
+        s.src = (d.location.protocol == "https:" ? "https:" : "http:") +
+            "//mc.yandex.ru/metrika/watch.js";
+
+        if (w.opera == "[object Opera]") {
+            d.addEventListener("DOMContentLoaded", f, false);
+        } else { f(); }
+    })(document, window, "yandex_metrika_callbacks");
+</script>
+<noscript><div><img src="//mc.yandex.ru/watch/20303959"
+                    style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter --><!-- analytics -->
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-92280238-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+<!-- analytics -->
+        </div>
+    </div>
+</div>
+</body>
+</html>
