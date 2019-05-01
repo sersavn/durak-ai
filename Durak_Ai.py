@@ -1,11 +1,10 @@
-import itertools
 import random
 import sys
 import time
 
 
 class Deck:
-    def __init__(self, deck_size, show_deck = None, show_encoded_deck = None):
+    def __init__(self, deck_size, show_deck=None, show_encoded_deck=None):
         self.deck_size = deck_size
         if show_deck is None:
             show_deck = []
@@ -19,12 +18,12 @@ class Deck:
 
             try:
                 if self.deck_size == 52:
-                    card_numbers = [i for i in range(2,15)]
+                    card_numbers = [i for i in range(2, 15)]
                 elif self.deck_size == 36:
-                    card_numbers = [i for i in range(6,15)]
-                return(card_numbers)
-            except UnboundLocalError as e:
-                print('\n', e)
+                    card_numbers = [i for i in range(6, 15)]
+                return card_numbers
+            except UnboundLocalError as card_amount_err:
+                print('\n', card_amount_err)
                 print("Wrong amount of cards")
                 sys.exit(1)
 
@@ -45,7 +44,8 @@ class Deck:
 
     def update_deck(self, cards_in_player_hand):
         self.show_deck = 'show_deck is outdated. Please, use show_encoded_deck'
-        self.show_encoded_deck = [i for i in self.show_encoded_deck if i not in cards_in_player_hand]
+        self.show_encoded_deck = [i for i in self.show_encoded_deck
+                                  if i not in cards_in_player_hand]
 
     def encode_deck(self):
         '''
@@ -59,9 +59,9 @@ class Deck:
             suits_except_trump = list(set(suits))
             suits_except_trump.remove(trump)
             encode_dict[trump] = 0
-            for num,val in enumerate(suits_except_trump):
+            for num, val in enumerate(suits_except_trump):
                 encode_dict[val] = num + 1
-            return(encode_dict)
+            return encode_dict
 
         def apply_encoding():
             splitted_deck = [(i.split('_')) for i in self.show_deck]
@@ -75,7 +75,7 @@ class Deck:
 
 
 class Player:
-    def __init__(self, nickname, current_cards = None):
+    def __init__(self, nickname, current_cards=None):
         self.nickname = nickname
 
         if current_cards is None:
@@ -94,48 +94,47 @@ class Player:
             #self.current_cards = self.current_cards[0]# ?
         else:
             print('{} hand is full'.format(self.nickname))
-            pass
 
     def attacking(self):
         card_to_throw = random.choice(self.current_cards)
         self.current_cards.remove(card_to_throw)
-        return(card_to_throw)
+        return card_to_throw
 
     def throwing_a_card(self, table):
         table_card_types = [i[0] for i in table]
         potential_card = [card for card in self.current_cards if
-        card[0] in table_card_types]
-        if len(potential_card) != 0:
+                          card[0] in table_card_types]
+        if potential_card:
             potential_card = random.choice(potential_card)
             self.current_cards.remove(potential_card)
             return potential_card
-        else:
-            return None
+        return None
 
     def defending(self, incoming_card):
         #checking if incoming_card is trump
         if incoming_card[1] == 0:
-            possible_options = [card for card in self.current_cards if (card[1] == 0 and card[0] >= incoming_card[0])]
+            possible_options = [card for card in self.current_cards
+                                if (card[1] == 0 and card[0] >= incoming_card[0])]
         #checking possible options to beat non trump card
         else:
-            possible_options = [card for card in self.current_cards if (card[1] == incoming_card[1] and card[0] >= incoming_card[0])]
+            possible_options = [card for card in self.current_cards if
+                                (card[1] == incoming_card[1] and card[0] >= incoming_card[0])]
             print('good until here')
             using_trump_cards = [card for card in self.current_cards if card[1] == 0]
-            if len(using_trump_cards) != 0:
+            if using_trump_cards:
                 possible_options = possible_options + using_trump_cards
         #checking can I beat incoming_card at all
-        if len(possible_options) == 0:
-            return(None)
-        else:
-            defence_option = random.choice(possible_options)
-            self.current_cards.remove(defence_option)
-            return(defence_option)
+        if not possible_options:
+            return None
+        defence_option = random.choice(possible_options)
+        self.current_cards.remove(defence_option)
+        return defence_option
 
 
 class Game:
     def __init__(self, list_of_player_instances, deck_instance,
-    table = None, release_deck = None, round_counter = None,
-    attacker_index = None, defender_index = None):
+                 table=None, release_deck=None, round_counter=None,
+                 attacker_index=None, defender_index=None):
         self.list_of_player_instances = list_of_player_instances
         self.deck_instance = deck_instance
 
@@ -178,11 +177,11 @@ class Game:
         works only for two palyers
         '''
         start_dict = {}
-        for p in self.list_of_player_instances:
+        for the_player in self.list_of_player_instances:
             try:
-                start_dict[p] = min([i[0] for i in p.current_cards if i[1] == 0])
+                start_dict[the_player] = min([i[0] for i in the_player.current_cards if i[1] == 0])
             except ValueError: #no trumps at all case
-                return(None)
+                return None
         try:
 
             attacker = min(start_dict, key=start_dict.get)
@@ -193,9 +192,8 @@ class Game:
         if len(self.list_of_player_instances) - 1 == attacker_index:
             defender_index = 0
             return(attacker_index, defender_index)
-        else:
-            defender_index = attacker_index + 1
-            return(attacker_index, defender_index)
+        defender_index = attacker_index + 1
+        return(attacker_index, defender_index)
 
     def round(self):
         if self.round_counter == 0:
@@ -221,7 +219,6 @@ class Game:
             quit()
         else:
             print('round non zero')
-            pass
         print('\nROUND {}\n'.format(self.round_counter))
         def first_phase():
             '''
@@ -240,7 +237,7 @@ class Game:
                 defender.current_cards += self.table
                 #self.table = []
                 print('first_phase_failed')
-                return('first_phase_failed')
+                return 'first_phase_failed'
 
         def second_phase():
             '''
@@ -260,7 +257,7 @@ class Game:
                     self.attacker_index = self.defender_index
                     self.defender_index = temp
                     print('second_phase ok')
-                    return('second_phase ok')
+                    return 'second_phase ok'
                     #except IndexError:
                         #return('second_phase no cards')
 
@@ -275,27 +272,29 @@ class Game:
                     print('defender cards', defender.current_cards)
                     defender.current_cards += self.table
                     print('second_phase failed')
-                    return('second_phase failed')
+                    return 'second_phase failed'
 
 
         print("\n\nHERE")
         #attacker.draw_a_card(self.deck_instance.show_encoded_deck)
         #defender.draw_a_card(self.deck_instance.show_encoded_deck)
-        print('attacker_index {}, defender_index {}'.format(self.attacker_index, self.defender_index))
+        print('attacker_index {}, defender_index {}'
+              .format(self.attacker_index, self.defender_index))
         if first_phase() != 'first_phase_failed':
             second_phase()
         self.round_counter += 1
         self.table = []
-        print('attacker_index {}, defender_index {}'.format(self.attacker_index, self.defender_index))
+        print('attacker_index {}, defender_index {}'
+              .format(self.attacker_index, self.defender_index))
         print('self.table', self.table)
         print('defender cards', defender.current_cards)
         print('attacker cards', attacker.current_cards)
-        return('switching to round {}'.format(self.round_counter))
+        return 'switching to round {}'.format(self.round_counter)
 
 
 
 def test():
-    t = time.time()
+    curr_time = time.time()
     i = 0
     john = Player('John')
     peter = Player('Peter')
@@ -311,7 +310,7 @@ def test():
             game_1 = Game(list_of_players, Deck(36))
             game_1.get_first_cards()
             time.sleep(0.001)
-    print(time.time() - t)
+    print(time.time() - curr_time)
 test()
     #print('deck_len', len(game_1.deck_instance.show_encoded_deck))
     #print('cc[0]', game_1.list_of_player_instances[0].current_cards)
