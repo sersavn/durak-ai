@@ -4,6 +4,14 @@ import time
 
 
 class Deck:
+    '''
+    Class Deck is needed to simulate the card Deck.
+    To initialize Deck instance needed to specify deck_size (36 or 52 cards)
+    It has following methods:
+    - get_deck
+    - update_deck
+    - encode_deck
+    '''
     def __init__(self, deck_size, show_deck=None, show_encoded_deck=None):
         self.deck_size = deck_size
         if show_deck is None:
@@ -14,8 +22,13 @@ class Deck:
         self.show_encoded_deck = show_encoded_deck
 
     def get_deck(self):
+        '''
+        Generates non-random deck
+        '''
         def card_range():
-
+            '''
+            Applying deck_size to the deck
+            '''
             try:
                 if self.deck_size == 52:
                     card_numbers = [i for i in range(2, 15)]
@@ -28,10 +41,16 @@ class Deck:
                 sys.exit(1)
 
         def suits():
+            '''
+            Storing names of the suits
+            '''
             suits_pack_ = ['Diamonds', 'Hearts', 'Spades', 'Clubs']
             return suits_pack_
 
         def random_deck():
+            '''
+            Randomizing generated deck
+            '''
             cards = []
             for number in card_range():
                 for suit in suits():
@@ -43,13 +62,17 @@ class Deck:
         self.show_deck = self.show_deck[0]
 
     def update_deck(self, cards_in_player_hand):
+        '''
+        Function is substracting all cards taken by player from the ecnoded deck
+        '''
         self.show_deck = 'show_deck is outdated. Please, use show_encoded_deck'
         self.show_encoded_deck = [i for i in self.show_encoded_deck
                                   if i not in cards_in_player_hand]
 
     def encode_deck(self):
         '''
-        Trump suit is encoded by 0.
+        Hot encoding the deck
+        Trump suit is encoded as 0.
         Other suits are encoded randomly
         '''
         def get_encoding():
@@ -74,7 +97,7 @@ class Deck:
         self.show_encoded_deck = self.show_encoded_deck[0]
 
 
-class Player:
+class Ai_Player:
     def __init__(self, nickname, current_cards=None):
         self.nickname = nickname
 
@@ -85,8 +108,6 @@ class Player:
     def draw_a_card(self, deck_container):
         cards_to_draw = 6 - len(self.current_cards)
         if len(deck_container) < cards_to_draw:
-            print('Deck is empty. Stopping')
-            #pass
             return 'Deck is empty'
 
         elif len(self.current_cards) < 6:
@@ -119,7 +140,6 @@ class Player:
         else:
             possible_options = [card for card in self.current_cards if
                                 (card[1] == incoming_card[1] and card[0] >= incoming_card[0])]
-            print('good until here')
             using_trump_cards = [card for card in self.current_cards if card[1] == 0]
             if using_trump_cards:
                 possible_options = possible_options + using_trump_cards
@@ -171,7 +191,6 @@ class Game:
             player.draw_a_card(self.deck_instance.show_encoded_deck)
             self.deck_instance.update_deck(player.current_cards)
 
-
     def init_move_pointer(self):
         '''
         works only for two palyers
@@ -217,8 +236,6 @@ class Game:
         if self.attacker_index == self.defender_index:
             print('same indexes')
             quit()
-        else:
-            print('round non zero')
         print('\nROUND {}\n'.format(self.round_counter))
         def first_phase():
             '''
@@ -227,16 +244,15 @@ class Game:
             '''
             attacker_card = attacker.attacking()
             self.table.append(attacker_card)
-            print('attacker added card', self.table[0])
+            print('attacker attacking with card', self.table[0])
             defence_card = defender.defending(self.table[-1])
             if defence_card != None:
                 self.table.append(defence_card)
                 print('defender added card', self.table[-1])
-                print('first_phase ok')
             else:
                 defender.current_cards += self.table
                 #self.table = []
-                print('first_phase_failed')
+                print(r"defender can't beat first attacker card")
                 return 'first_phase_failed'
 
         def second_phase():
@@ -250,13 +266,13 @@ class Game:
 
                 if attacker_additional_card != None:
                     self.table.append(attacker_additional_card)
-                    print('attacker added additional_card', attacker_additional_card)
+                    print('attacking with', attacker_additional_card)
                 else:
                     #try:
                     temp = self.attacker_index
                     self.attacker_index = self.defender_index
                     self.defender_index = temp
-                    print('second_phase ok')
+                    print('defender successfully defended this round')
                     return 'second_phase ok'
                     #except IndexError:
                         #return('second_phase no cards')
@@ -265,17 +281,17 @@ class Game:
                 defence_card = defender.defending(self.table[-1])
 
                 if defence_card != None:
-                    print('defender added additional card', defence_card)
+                    print('defending with', defence_card)
                     self.table.append(defence_card)
                     #print('table', self.table)
                 else:
                     print('defender cards', defender.current_cards)
                     defender.current_cards += self.table
-                    print('second_phase failed')
+                    print(r"defender can't defend from additional cards")
+                    print('\ndefender collecting cards')
                     return 'second_phase failed'
 
 
-        print("\n\nHERE")
         #attacker.draw_a_card(self.deck_instance.show_encoded_deck)
         #defender.draw_a_card(self.deck_instance.show_encoded_deck)
         print('attacker_index {}, defender_index {}'
@@ -286,18 +302,17 @@ class Game:
         self.table = []
         print('attacker_index {}, defender_index {}'
               .format(self.attacker_index, self.defender_index))
-        print('self.table', self.table)
         print('defender cards', defender.current_cards)
         print('attacker cards', attacker.current_cards)
         return 'switching to round {}'.format(self.round_counter)
 
 
 
-def test():
+def ai_vs_ai_100_games():
     curr_time = time.time()
     i = 0
-    john = Player('John')
-    peter = Player('Peter')
+    john = Ai_Player('John')
+    peter = Ai_Player('Peter')
     list_of_players = [john, peter]
     while i != 100:
         print('\n\n', i, '\n\n')
@@ -311,7 +326,9 @@ def test():
             game_1.get_first_cards()
             time.sleep(0.001)
     print(time.time() - curr_time)
-test()
-    #print('deck_len', len(game_1.deck_instance.show_encoded_deck))
-    #print('cc[0]', game_1.list_of_player_instances[0].current_cards)
-    #print('cc[1]', game_1.list_of_player_instances[1].current_cards)
+
+#ai_vs_ai_100_games()
+
+import numpy as np
+
+print(np.zeros((4,6)))
