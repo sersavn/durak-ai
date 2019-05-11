@@ -2,55 +2,54 @@ import random
 import sys
 import time
 
+# TODO:
+'''
+1. Add encoding legend
+2. Add Human player class
+3. Display trumps and cards left in deck in the begining of the round
+4. Add ability to pick different Ai playstyles
+5. Encode cards back
+(6. Add way to collect data)
+(7. Imporve game visualization)
+
+'''
 
 class Deck:
     '''
     Class Deck is needed to simulate the card Deck.
-    To initialize Deck instance needed to specify deck_size (36 or 52 cards)
     It has following methods:
+    To initialize Deck instance needed to specify deck_size (36 or 52 cards)
     - get_deck
     - update_deck
     - encode_deck
     '''
-    def __init__(self, deck_size, show_deck=None, show_encoded_deck=None):
+    def __init__(self, deck_size):
         self.deck_size = deck_size
-        if show_deck is None:
-            show_deck = []
-        self.show_deck = show_deck
-        if show_encoded_deck is None:
-            show_encoded_deck = []
-        self.show_encoded_deck = show_encoded_deck
+        self.show_deck = []
+        self.encode_legend = {}
+        self.show_encoded_deck = []
 
     def get_deck(self):
         '''
-        Generates non-random deck
+        Generates deck
         '''
         def card_range():
-            '''
-            Applying deck_size to the deck
-            '''
             try:
                 if self.deck_size == 52:
                     card_numbers = [i for i in range(2, 15)]
                 elif self.deck_size == 36:
                     card_numbers = [i for i in range(6, 15)]
                 return card_numbers
+
             except UnboundLocalError as card_amount_err:
-                print('\n', card_amount_err)
-                print("Wrong amount of cards")
+                print("{} Wrong amount of cards".format(card_amount_err))
                 sys.exit(1)
 
         def suits():
-            '''
-            Storing names of the suits
-            '''
             suits_pack_ = ['Diamonds', 'Hearts', 'Spades', 'Clubs']
             return suits_pack_
 
         def random_deck():
-            '''
-            Randomizing generated deck
-            '''
             cards = []
             for number in card_range():
                 for suit in suits():
@@ -58,12 +57,12 @@ class Deck:
                     random.shuffle(cards)
             return cards
 
-        self.show_deck.append(random_deck())
-        self.show_deck = self.show_deck[0]
+        self.show_deck = random_deck()
 
     def update_deck(self, cards_in_player_hand):
         '''
-        Function is substracting all cards taken by player from the ecnoded deck
+        Function is updating deck by substracting
+        all cards taken by player from the ecnoded deck
         '''
         self.show_deck = 'show_deck is outdated. Please, use show_encoded_deck'
         self.show_encoded_deck = [i for i in self.show_encoded_deck
@@ -75,7 +74,7 @@ class Deck:
         Trump suit is encoded as 0.
         Other suits are encoded randomly
         '''
-        def get_encoding():
+        def suit_encoding():
             suits = [(i.split('_')[1]) for i in self.show_deck]
             encode_dict = {}
             trump = suits[-1]
@@ -84,33 +83,40 @@ class Deck:
             encode_dict[trump] = 0
             for num, val in enumerate(suits_except_trump):
                 encode_dict[val] = num + 1
+            self.encode_legend = encode_dict
+            #print("SELF ENCPODE LEGEND", self.encode_legend)
+            #print("!ENCODE_DICT OUTPUT", encode_dict)
             return encode_dict
 
-        def apply_encoding():
+        def apply_suit_encoding():
             splitted_deck = [(i.split('_')) for i in self.show_deck]
             for num, card in enumerate(splitted_deck):
                 splitted_deck[num][0] = int(splitted_deck[num][0])
-                splitted_deck[num][1] = get_encoding()[card[1]]
+                splitted_deck[num][1] = suit_encoding()[card[1]]
             return splitted_deck
 
-        self.show_encoded_deck.append(apply_encoding())
-        self.show_encoded_deck = self.show_encoded_deck[0]
+        self.show_encoded_deck = apply_suit_encoding()
+        print("Suit encoding legend {}".format(suit_encoding()))
 
+class Deck_Encoder:
+    pass
+
+class Deck_Decoder:
+    pass
+#    def __init__(self, encoded_deck_instance)
 
 class Ai_Player:
-    def __init__(self, nickname, current_cards=None):
-        self.nickname = nickname
 
-        if current_cards is None:
-            current_cards = []
-        self.current_cards = current_cards
-        #https://stackoverflow.com/questions/13564474/calling-a-method-of-a-class-on-one-object-affect-another-object-in-the-same-cl
+    def __init__(self, nickname):
+        self.nickname = nickname
+        self.current_cards = []
+
     def draw_a_card(self, deck_container):
         cards_to_draw = 6 - len(self.current_cards)
+
         if len(deck_container) < cards_to_draw:
             return 'Deck is empty'
-
-        elif len(self.current_cards) < 6:
+        if len(self.current_cards) < 6:
             self.current_cards += deck_container[:cards_to_draw]
             #self.current_cards = self.current_cards[0]# ?
         else:
@@ -152,33 +158,16 @@ class Ai_Player:
 
 
 class Game:
-    def __init__(self, list_of_player_instances, deck_instance,
-                 table=None, release_deck=None, round_counter=None,
-                 attacker_index=None, defender_index=None):
+    def __init__(self, list_of_player_instances, deck_instance):
         self.list_of_player_instances = list_of_player_instances
         self.deck_instance = deck_instance
-
-        if table is None:
-            table = []
-        self.table = table
-
-        if release_deck is None:
-            release_deck = []
-        self.release_deck = release_deck
-
-        if round_counter is None:
-            round_counter = 0
-        self.round_counter = round_counter
-
-        if attacker_index is None:
-            attacker_index = 101 # a value that wiil be replaced
-        self.attacker_index = attacker_index
-
-        if defender_index is None:
-            defender_index = 100
-        self.defender_index = defender_index
-
+        self.table = []
+        self.release_deck = []
+        self.round_counter = 0
+        self.attacker_index = 101 # a value that wiil be replaced
+        self.defender_index = 100
         print('\nGAME STARTS\n')
+
     def get_first_cards(self):
         self.deck_instance.get_deck()
         self.deck_instance.encode_deck()
@@ -216,11 +205,6 @@ class Game:
 
     def round(self):
         if self.round_counter == 0:
-            '''
-            Thinking that try except is faster than if else.
-            Cant call init_move_pointer in case of no Trumps
-            because calling function twice cause issues with random
-            '''
             try:
                 self.attacker_index = self.init_move_pointer()[0]
                 self.defender_index = self.init_move_pointer()[1]
@@ -244,7 +228,7 @@ class Game:
             '''
             attacker_card = attacker.attacking()
             self.table.append(attacker_card)
-            print('attacker attacking with card', self.table[0])
+            print('attacking with card', self.table[0])
             defence_card = defender.defending(self.table[-1])
             if defence_card != None:
                 self.table.append(defence_card)
@@ -266,7 +250,7 @@ class Game:
 
                 if attacker_additional_card != None:
                     self.table.append(attacker_additional_card)
-                    print('attacking with', attacker_additional_card)
+                    print('throwing a', attacker_additional_card)
                 else:
                     #try:
                     temp = self.attacker_index
@@ -277,7 +261,19 @@ class Game:
                     #except IndexError:
                         #return('second_phase no cards')
 
-                print('table', self.table)
+
+                def beautify_table():
+                    '''
+                    Used instead of using
+                    print('table', self.table)
+                    All defender cards is on top part of the table
+                    While attacker cards is on bottom part of the table
+                    '''
+                    defender_cards = [val for num,val in enumerate(self.table) if num%2==1]
+                    print('\nCurrent cards on a table:\ndefender cards', defender_cards)
+                    attacker_cards = [val for num,val in enumerate(self.table) if num%2==0]
+                    print('attacker cards {}\n'.format(attacker_cards))
+                beautify_table()
                 defence_card = defender.defending(self.table[-1])
 
                 if defence_card != None:
@@ -327,8 +323,8 @@ def ai_vs_ai_100_games():
             time.sleep(0.001)
     print(time.time() - curr_time)
 
-#ai_vs_ai_100_games()
+ai_vs_ai_100_games()
 
 import numpy as np
 
-print(np.zeros((4,6)))
+#print(np.zeros((4,6)))
