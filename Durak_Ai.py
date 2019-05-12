@@ -18,16 +18,13 @@ class Deck:
     '''
     Class Deck is needed to simulate the card Deck.
     It has following methods:
-    To initialize Deck instance needed to specify deck_size (36 or 52 cards)
-    - get_deck
-    - update_deck
-    - encode_deck
+    To initialize Deck instance needed to specify size (36 or 52 cards)
     '''
-    def __init__(self, deck_size):
-        self.deck_size = deck_size
-        self.show_deck = []
+    def __init__(self, size):
+        self.size = size
+        self.deck = self.get_deck()
+        self.encoded_deck = []
         self.encode_legend = {}
-        self.show_encoded_deck = []
 
     def get_deck(self):
         '''
@@ -35,12 +32,11 @@ class Deck:
         '''
         def card_range():
             try:
-                if self.deck_size == 52:
+                if self.size == 52:
                     card_numbers = [i for i in range(2, 15)]
-                elif self.deck_size == 36:
+                elif self.size == 36:
                     card_numbers = [i for i in range(6, 15)]
                 return card_numbers
-
             except UnboundLocalError as card_amount_err:
                 print("{} Wrong amount of cards".format(card_amount_err))
                 sys.exit(1)
@@ -56,57 +52,82 @@ class Deck:
                     cards.append(str(number) + '_' + str(suit))
                     random.shuffle(cards)
             return cards
+        return random_deck()
+        #self.deck = random_deck()
 
-        self.show_deck = random_deck()
+    def update_deck(self, num_of_cards_to_draw):
+        pass
+'''
+def update_deck(self, cards_in_player_hand):
 
-    def update_deck(self, cards_in_player_hand):
-        '''
-        Function is updating deck by substracting
-        all cards taken by player from the ecnoded deck
-        '''
-        self.show_deck = 'show_deck is outdated. Please, use show_encoded_deck'
-        self.show_encoded_deck = [i for i in self.show_encoded_deck
-                                  if i not in cards_in_player_hand]
+    #Function is updating deck by substracting
+    #all cards taken by player from the ecnoded deck
 
-    def encode_deck(self):
-        '''
-        Hot encoding the deck
-        Trump suit is encoded as 0.
-        Other suits are encoded randomly
-        '''
-        def suit_encoding():
-            suits = [(i.split('_')[1]) for i in self.show_deck]
-            encode_dict = {}
-            trump = suits[-1]
-            suits_except_trump = list(set(suits))
-            suits_except_trump.remove(trump)
-            encode_dict[trump] = 0
-            for num, val in enumerate(suits_except_trump):
-                encode_dict[val] = num + 1
-            self.encode_legend = encode_dict
-            #print("SELF ENCPODE LEGEND", self.encode_legend)
-            #print("!ENCODE_DICT OUTPUT", encode_dict)
-            return encode_dict
+    self.deck = 'deck is outdated. Please, use show_encoded_deck'
+    self.show_encoded_deck = [i for i in self.show_encoded_deck
+                              if i not in cards_in_player_hand]
+'''
 
-        def apply_suit_encoding():
-            splitted_deck = [(i.split('_')) for i in self.show_deck]
-            for num, card in enumerate(splitted_deck):
-                splitted_deck[num][0] = int(splitted_deck[num][0])
-                splitted_deck[num][1] = suit_encoding()[card[1]]
-            return splitted_deck
+class DeckEncoder:
+    '''
+    Encoding all str to numerical
+    deck_instance == instance of the class Deck
+    '''
+    def __init__(self, deck_instance):
+        self.deck_instance = deck_instance
+        self._suit_encode()
 
-        self.show_encoded_deck = apply_suit_encoding()
-        print("Suit encoding legend {}".format(suit_encoding()))
+    def _suit_encode(self):
+        suits = [(i.split('_')[1]) for i in self.deck_instance.deck]
+        trump = suits[-1]
+        suits_except_trump = list(set(suits))
+        suits_except_trump.remove(trump)
+        encode_dict = {trump : 0}
+        encode_dict.update(dict([(val, num +1) for num, val in enumerate(suits_except_trump)]))
+        self.deck_instance.encode_legend = encode_dict
 
-class Deck_Encoder:
-    pass
+    def encode(self):
+        splitted_deck = [(i.split('_')) for i in self.deck_instance.deck]
+        for num, card in enumerate(splitted_deck):
+            splitted_deck[num][0] = int(splitted_deck[num][0])
+            splitted_deck[num][1] = self.deck_instance.encode_legend[card[1]]
+        self.deck_instance.encoded_deck = splitted_deck
 
-class Deck_Decoder:
-    pass
-#    def __init__(self, encoded_deck_instance)
+class DeckDecoder:
+    '''
+    Encoding all numerical back to str
+    '''
+    def __init__(self, deck_instance):
+        self.deck_instance = deck_instance
 
-class Ai_Player:
+    def decode(self):
+        encode_legend_rev = dict([[v, k] for k, v in self.deck_instance.encode_legend.items()])
+        decoded_deck = [str(i[0]) + '_' + str(encode_legend_rev[i[1]]) \
+                        for i in self.deck_instance.encoded_deck]
+        self.deck_instance.deck = decoded_deck
 
+class Player:
+    def __init__(self, nickname):
+        self.nickname = nickname
+        self.current_cards = []
+
+    def draw_a_card(self, deck_instance):
+        cards_to_draw = 6 - len(self.current_cards)
+        cards_left_in_deck = len(deck_instance.encoded_deck)
+        if cards_left_in_deck > cards_to_draw:
+            self.current_cards += deck_instance.encoded_deck[:cards_to_draw]
+        elif cards_left_in_deck != 0:
+            deck_instance.encoded_deck = []
+        else:
+            print('no cards to draw')
+        deck_instance.update_deck()
+        deck_instance.encoded_deck = [i for i in deck_instance.encoded_deck if i not in self.current_cards]
+
+    def make_a_move(self):
+        pass
+
+
+class AiPlayer:
     def __init__(self, nickname):
         self.nickname = nickname
         self.current_cards = []
@@ -302,13 +323,36 @@ class Game:
         print('attacker cards', attacker.current_cards)
         return 'switching to round {}'.format(self.round_counter)
 
+j = time.time()
+for i in range(1000):
+    deck = Deck(36)
+    print(deck.deck)
+    deck_encoder = DeckEncoder(deck)
+    deck_encoder.encode()
+    print('\n')
+    deck_decoder = DeckDecoder(deck)
+    deck_decoder.decode()
+    p1 = Player('ANTOHA')
+    print(deck.encoded_deck)
+    p1.draw_a_card(deck)
+    print(p1.current_cards)
+    print('\n')
+    print(deck.encoded_deck)
+    i += 1
+print(time.time() - j)
+#deck.suit_encoding()
+#print(deck.deck)
+#print(deck.encode_legend)
+#decoded_deck = DeckEncoder(deck)#.decode()
+#print(decoded_deck.decode())
 
 
+'''
 def ai_vs_ai_100_games():
     curr_time = time.time()
     i = 0
-    john = Ai_Player('John')
-    peter = Ai_Player('Peter')
+    john = AiPlayer('John')
+    peter = AiPlayer('Peter')
     list_of_players = [john, peter]
     while i != 100:
         print('\n\n', i, '\n\n')
@@ -324,7 +368,6 @@ def ai_vs_ai_100_games():
     print(time.time() - curr_time)
 
 ai_vs_ai_100_games()
-
-import numpy as np
+'''
 
 #print(np.zeros((4,6)))
