@@ -4,11 +4,11 @@ import time
 
 # TODO:
 '''
-1. Add encoding legend
-2. Add Human player class
+1. Add encoding legend +
+2. Add Human player class +
 3. Display trumps and cards left in deck in the begining of the round
 4. Add ability to pick different Ai playstyles
-5. Encode cards back
+5. Encode cards back +
 (6. Add way to collect data)
 (7. Imporve game visualization)
 
@@ -55,8 +55,14 @@ class Deck:
         return random_deck()
         #self.deck = random_deck()
 
-    def update_deck(self, num_of_cards_to_draw):
-        pass
+    def update_deck(self, num_of_cards):
+        self.encoded_deck = self.encoded_deck[num_of_cards:]
+
+    def show_last_card(self):
+        self.deck[-1]
+
+    #def show_trump(self):
+
 '''
 def update_deck(self, cards_in_player_hand):
 
@@ -112,71 +118,87 @@ class Player:
         self.current_cards = []
 
     def draw_a_card(self, deck_instance):
-        cards_to_draw = 6 - len(self.current_cards)
-        cards_left_in_deck = len(deck_instance.encoded_deck)
-        if cards_left_in_deck > cards_to_draw:
-            self.current_cards += deck_instance.encoded_deck[:cards_to_draw]
-        elif cards_left_in_deck != 0:
-            deck_instance.encoded_deck = []
+        n_cards_to_draw = 6 - len(self.current_cards)
+        n_of_cards_left = len(deck_instance.encoded_deck)
+        if n_of_cards_left > n_cards_to_draw:
+            self.current_cards += deck_instance.encoded_deck[:n_cards_to_draw]
+            deck_instance.update_deck(n_cards_to_draw)
+        elif n_of_cards_left != 0:
+            self.current_cards += deck_instance.encoded_deck[:]
+            deck_instance.update_deck(n_of_cards_left)
         else:
             print('no cards to draw')
-        deck_instance.update_deck()
-        deck_instance.encoded_deck = [i for i in deck_instance.encoded_deck if i not in self.current_cards]
+            pass
 
-    def make_a_move(self):
-        pass
+    def remove_card(self, card):
+        self.current_cards.remove(card)
 
+    def main_attacking_options(self):
+        return self.current_cards
 
-class AiPlayer:
-    def __init__(self, nickname):
-        self.nickname = nickname
-        self.current_cards = []
+    def additional_attacking_options(self, table):
+        table_card_types = [i[0] for i in table.curr_table]
+        potential_cards = [card for card in self.current_cards if
+                                  card[0] in table_card_types]
+        return potential_cards
 
-    def draw_a_card(self, deck_container):
-        cards_to_draw = 6 - len(self.current_cards)
-
-        if len(deck_container) < cards_to_draw:
-            return 'Deck is empty'
-        if len(self.current_cards) < 6:
-            self.current_cards += deck_container[:cards_to_draw]
-            #self.current_cards = self.current_cards[0]# ?
-        else:
-            print('{} hand is full'.format(self.nickname))
-
-    def attacking(self):
-        card_to_throw = random.choice(self.current_cards)
-        self.current_cards.remove(card_to_throw)
-        return card_to_throw
-
-    def throwing_a_card(self, table):
-        table_card_types = [i[0] for i in table]
-        potential_card = [card for card in self.current_cards if
-                          card[0] in table_card_types]
-        if potential_card:
-            potential_card = random.choice(potential_card)
-            self.current_cards.remove(potential_card)
-            return potential_card
-        return None
-
-    def defending(self, incoming_card):
-        #checking if incoming_card is trump
+    def defending_options(self, table):
+        #checking if incoming_card (last card on a table) is trump
+        incoming_card = table.curr_table[-1]
         if incoming_card[1] == 0:
             possible_options = [card for card in self.current_cards
                                 if (card[1] == 0 and card[0] >= incoming_card[0])]
         #checking possible options to beat non trump card
         else:
-            possible_options = [card for card in self.current_cards if
+            non_trump_options = [card for card in self.current_cards if
                                 (card[1] == incoming_card[1] and card[0] >= incoming_card[0])]
-            using_trump_cards = [card for card in self.current_cards if card[1] == 0]
-            if using_trump_cards:
-                possible_options = possible_options + using_trump_cards
-        #checking can I beat incoming_card at all
-        if not possible_options:
-            return None
-        defence_option = random.choice(possible_options)
-        self.current_cards.remove(defence_option)
-        return defence_option
+            trump_cards = [card for card in self.current_cards if card[1] == 0]
+            possible_options = non_trump_options + trump_cards
+        return possible_options
 
+class HumanPlayer(Player):
+    def __init__(self, nickname):
+        super().__init__(nicname)
+
+    def attacking(self):
+        attack_card = input('Pick a number from 0 till {} to start the attack'.format(len(self.current_cards)-1))
+        return attack_card
+
+class AiPlayerDumb(Player):
+    def __init__(self, nickname):
+        super().__init__(nickname)
+
+    def attacking(self):
+        attack_card = random.choice(self.current_cards)
+        self.remove_card(attack_card)
+        return attack_card
+
+    def defending(self, incoming):
+        defence_card = random.choice(possible_options)
+        self.remove_card(defence_card)
+        return defence_card
+
+class Table:
+    def __init__(self):
+        self.curr_table = curr_table
+        pass
+
+    def update_table(self):
+        pass
+
+    def move_to_pile(self):
+        pass
+
+class Pile:
+
+    def __init__(self):
+        self.pile = []
+
+    def update_pile(self, list_of_cards):
+        self.pile += list_of_cards
+
+    def clear_pile(self):
+        self.pile = []
 
 class Game:
     def __init__(self, list_of_player_instances, deck_instance):
@@ -324,22 +346,20 @@ class Game:
         return 'switching to round {}'.format(self.round_counter)
 
 j = time.time()
-for i in range(1000):
-    deck = Deck(36)
-    print(deck.deck)
-    deck_encoder = DeckEncoder(deck)
-    deck_encoder.encode()
-    print('\n')
-    deck_decoder = DeckDecoder(deck)
-    deck_decoder.decode()
-    p1 = Player('ANTOHA')
-    print(deck.encoded_deck)
-    p1.draw_a_card(deck)
-    print(p1.current_cards)
-    print('\n')
-    print(deck.encoded_deck)
-    i += 1
-print(time.time() - j)
+deck = Deck(36)
+print(deck.deck)
+Deck_Encoder = DeckEncoder(deck)
+Deck_Encoder.encode()
+print('\n')
+Deck_Decoder = DeckDecoder(deck)
+Deck_Decoder.decode()
+p1 = Player('ANTOHA')
+p1.draw_a_card(deck)
+p2 = AiPlayer('SMRN')
+p2.draw_a_card(deck)
+print(p2.current_cards)
+print(p2.attacking())
+#pr
 #deck.suit_encoding()
 #print(deck.deck)
 #print(deck.encode_legend)
