@@ -139,7 +139,7 @@ class Player:
     def additional_attacking_options(self, table):
         table_card_types = [i[0] for i in table.curr_table]
         potential_cards = [card for card in self.current_cards if
-                                  card[0] in table_card_types]
+                           card[0] in table_card_types]
         return potential_cards
 
     def defending_options(self, table):
@@ -158,10 +158,19 @@ class Player:
 
 class HumanPlayer(Player):
     def __init__(self, nickname):
-        super().__init__(nicname)
+        super().__init__(nickname)
+        #self.description()
+
+    #def description(self):
+        #print(self.current_cards)
+        #print("Your_Turn, {}!".format(self.nickname))
+        #return None
 
     def attacking(self):
-        attack_card = input('Pick a number from 0 till {} to start the attack'.format(len(self.current_cards)-1))
+        print("Your_Turn, {}!\nHere is your cards:".format(self.nickname))
+        attack_card_num = input('{}\n Pick a number from 0 till {} to start the attack'.format(self.current_cards, len(self.current_cards)-1))
+        attack_card = self.current_cards[int(attack_card_num)]
+        self.remove_card(attack_card)
         return attack_card
 
 class AiPlayerDumb(Player):
@@ -353,12 +362,9 @@ Deck_Encoder.encode()
 print('\n')
 Deck_Decoder = DeckDecoder(deck)
 Deck_Decoder.decode()
-p1 = Player('ANTOHA')
+p1 = HumanPlayer('ANTOHA')
 p1.draw_a_card(deck)
-p2 = AiPlayer('SMRN')
-p2.draw_a_card(deck)
-print(p2.current_cards)
-print(p2.attacking())
+print(p1.attacking())
 #pr
 #deck.suit_encoding()
 #print(deck.deck)
