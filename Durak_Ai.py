@@ -133,10 +133,10 @@ class Player:
     def remove_card(self, card):
         self.current_cards.remove(card)
 
-    def main_attacking_options(self):
+    def attacking_options(self):
         return self.current_cards
 
-    def additional_attacking_options(self, table):
+    def adding_card_options(self, table):
         table_card_types = [i[0] for i in table.curr_table]
         potential_cards = [card for card in self.current_cards if
                            card[0] in table_card_types]
@@ -159,19 +159,30 @@ class Player:
 class HumanPlayer(Player):
     def __init__(self, nickname):
         super().__init__(nickname)
-        #self.description()
-
-    #def description(self):
-        #print(self.current_cards)
-        #print("Your_Turn, {}!".format(self.nickname))
-        #return None
 
     def attacking(self):
-        print("Your_Turn, {}!\nHere is your cards:".format(self.nickname))
-        attack_card_num = input('{}\n Pick a number from 0 till {} to start the attack'.format(self.current_cards, len(self.current_cards)-1))
-        attack_card = self.current_cards[int(attack_card_num)]
+        print("Your Turn to attack, {}!\nHere is your cards:".format(self.nickname))
+        attack_card_num = input('{}\n Pick a card number from 0 till {} '
+                                .format(self.attacking_options(), len(self.attacking_options())-1))
+        attack_card = self.attacking_options()[int(attack_card_num)]
         self.remove_card(attack_card)
         return attack_card
+
+    def defending(self, table):
+        print("Your Turn to defend, {}!\nHere are your options: ".format(self.nickname))
+        def_card_num = input('{}\n Pick a card number from 0 till {} '
+                                .format(self.defending_options(table), len(self.defending_options(table))-1))
+        defend_card = self.defending_options(table)[int(attack_card_num)]
+        self.remove_card(defend_card)
+        return defend_card
+
+    def adding_card(self,table):
+        print("Your Turn to add cards, {}!\nHere are your options: ".format(self.nickname))
+        adding_card_num = input('{}\n Pick a card number from 0 till {} ')
+                                .format(self.adding_card_options(table), len(self.adding_card_options(table))-1))
+        card_to_add = self.adding_card_options(table)[int(adding_card_num)]
+        self.remove_card(card_to_add)
+        return card_to_add
 
 class AiPlayerDumb(Player):
     def __init__(self, nickname):
