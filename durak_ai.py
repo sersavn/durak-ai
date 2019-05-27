@@ -109,12 +109,13 @@ class DeckDecoder:
     def example(self):
         return('input:\n{}\noutput:\n{}'.format(self.deck_instance.encoded_cards, self.deck_instance.cards))
 
+
 class Player:
     def __init__(self, nickname):
         self.nickname = nickname
         self.cards = []
 
-    def draw_a_card(self, deck_instance):
+    def draw_cards(self, deck_instance):
         n_cards_to_draw = 6 - len(self.cards)
         n_of_cards_left = len(deck_instance.encoded_cards)
         if n_of_cards_left > n_cards_to_draw:
@@ -133,13 +134,13 @@ class Player:
         return self.cards
 
     def adding_card_options(self, table):
-        table_card_types = [i[0] for i in table.table]
+        table_card_types = [i[0] for i in table.cards]
         potential_cards = [card for card in self.cards if card[0] in table_card_types]
         return potential_cards
 
     def defending_options(self, table):
         #checking if incoming_card (last card on a table) is trump
-        incoming_card = table.table[-1]
+        incoming_card = table.cards[-1]
         if incoming_card[1] == 0:
             possible_options = [card for card in self.cards
                                 if (card[1] == 0 and card[0] >= incoming_card[0])]
@@ -151,6 +152,9 @@ class Player:
             possible_options = non_trump_options + trump_cards
         return possible_options
 
+    def grab_table(self, table):
+        self.cards += table.cards
+        table.clear_table()
 
 class HumanPlayer(Player):
     def __init__(self, nickname):
@@ -166,14 +170,17 @@ class HumanPlayer(Player):
         return attack_card
 
     def defend(self, table):
-        print("Your Turn to defend, {}!\nHere are your options: ".format(self.nickname))
-        def_card_num = input('{}\n Pick a card number from 0 till {} '
-                             .format(self.defending_options(table),
-                                     len(self.defending_options(table))-1))
-        defend_card = self.defending_options(table)[int(def_card_num)]
-        self.remove_card(defend_card)
-        table.update_table(defend_card)
-        return defend_card
+        if self.defending_options(table):
+            print("Your Turn to defend, {}!\nHere are your options: ".format(self.nickname))
+            def_card_num = input('{}\n Pick a card number from 0 till {} '
+                                 .format(self.defending_options(table),
+                                         len(self.defending_options(table))-1))
+            defend_card = self.defending_options(table)[int(def_card_num)]
+            self.remove_card(defend_card)
+            table.update_table(defend_card)
+            return defend_card
+        print(r"you can't defend, {}".format(self.nickname))
+        return None
 
     def adding_card(self, table):
         if self.adding_card_options(table):
@@ -186,7 +193,6 @@ class HumanPlayer(Player):
             table.update_table(card_to_add)
             return card_to_add
         return None
-
 
 
 class AiPlayerDumb(Player):
@@ -218,17 +224,19 @@ class AiPlayerDumb(Player):
 
 class Table:
     def __init__(self):
-        self.table = []
+        self.cards = []
 
     def update_table(self, card):
-        self.table += [card]
+        self.cards += [card]
 
     def move_to_pile(self):
         pass
 
     def show(self):
-        return self.table
+        return self.cards
 
+    def clear_table(self):
+        self.cards = []
 
 class Pile:
 
@@ -247,6 +255,8 @@ class Pointer:
         self.list_of_player_instances = list_of_player_instances
         self.attacker_id = self._init_move_pointer()[0]
         self.defender_id = self._init_move_pointer()[1]
+        if self.attacker_id == self.defender_id:
+            sys.exit('wrong attacker/defender ids')
 
     def _init_move_pointer(self):
         start_dict = {}
@@ -254,7 +264,8 @@ class Pointer:
             try:
                 start_dict[the_player] = min([i[0] for i in the_player.cards if i[1] == 0])
             except ValueError as val_e:
-                print(val_e, r"can't pount the move")
+                pass
+                #print(val_e, r", it can't point which player move is now. Defining move order by random")
 
         try:
             attacker = min(start_dict, key=start_dict.get)
@@ -285,26 +296,43 @@ class Round:
         self.attacker = players_list[pointer.attacker_id]
         self.defender = players_list[pointer.defender_id]
         self.table = Table()
+        self.round()
 
-    def attacking(self):
-        local_pointer = self.pointer
-        if local_pointer == self.pointer:
-            print(attacker.attack(self.table))
+    def round(self):
+        if self.first_stage() == None:
+            print(r"defender can't defend from attacker")
+            self.defender.grab_table(self.table)
+            self.attacker.draw_cards(self.deck)
+            pass
+        else:
+            self.second_stage()
+            print('not made yet')
 
-    def defending(self):
-        pass
+    def first_stage(self):
+        self.attacker.attack(self.table)
+        print("TABLE", self.table.cards)
+        return self.defender.defend(self.table)
+
+    def second_stage(self):
+        while self.attacker.adding_card(self.table) != None:
+            self.attacker.adding_card(self.table)
+            print("TABLE", self.table.cards)
+            self.defender.defend(self.table)
+        #pass
+
 
 
 class Game:
-    def __init__(self, players_list, deck_size):
+    def __init__(self, players_list, deck):
         self.players_list = players_list
-        self.deck = Deck(deck_size)
+        self.deck = deck
+        self.get_cards()
         self.pointer = Pointer(players_list)
         self.table = Table()
 
     def get_cards(self):
         for player in self.players_list:
-            player.draw_a_card(self.deck)
+            player.draw_cards(self.deck)
 
     def round(self):
         pass
@@ -313,14 +341,21 @@ class Game:
 p1 = HumanPlayer('ANTOHA')
 p2 = AiPlayerDumb('BOT')
 players_list = [p1, p2]
+deck = Deck(36)
+g = Game(players_list, deck)
+ptr = Pointer(players_list)
+print(ptr.show())
+r = Round(players_list, ptr, deck)
+print(deck.encoded_cards)
+print(p1.cards)
+print(p2.cards)
 
+#r.round_mechanics()
+'''
 g = Game(players_list, 36)
-print(g.deck.cards)
-print(g.deck.encoded_cards)
-print(g.deck.encode_legend)
-#print(ng.pointer.show())
 #ng.pointer.switch()
 #print(ng.pointer.show())
+'''
 '''
 deck = Deck(36)
 DeckEncoder(deck).encode()
