@@ -161,36 +161,50 @@ class HumanPlayer(Player):
         super().__init__(nickname)
 
     def attack(self, table):
-        print("Your Turn to attack, {}!\nHere is your cards:".format(self.nickname))
-        attack_card_num = input('{}\n Pick a card number from 0 till {} '
+        print("Your Turn to attack, {}:".format(self.nickname))
+        attack_card_num = input('{}\nPick a card number from 0 till {} '
                                 .format(self.attacking_options(), len(self.attacking_options())-1))
         attack_card = self.attacking_options()[int(attack_card_num)]
+        print('card {} added'.format(attack_card))
         self.remove_card(attack_card)
         table.update_table(attack_card)
         return attack_card
 
     def defend(self, table):
+        print('T: {}'.format(table.show()))
         if self.defending_options(table):
-            print("Your Turn to defend, {}!\nHere are your options: ".format(self.nickname))
-            def_card_num = input('{}\n Pick a card number from 0 till {} '
+            print("Your Turn to defend, {}:".format(self.nickname))
+            def_card_num = input("{}\nPick a card number from 0 till {}\n'g' to grab cards\n't' to check table\n"
                                  .format(self.defending_options(table),
                                          len(self.defending_options(table))-1))
+            if def_card_num == 'g':
+                self.grab_table(table)
+                return None
+            elif def_card_num == 't':
+                return 'T: {}'.format(self.defend(table))
             defend_card = self.defending_options(table)[int(def_card_num)]
+            print('card {} added'.format(defend_card))
             self.remove_card(defend_card)
             table.update_table(defend_card)
             return defend_card
         print(r"you can't defend, {}".format(self.nickname))
+        self.grab_table(table)
         return None
 
     def adding_card(self, table):
         if self.adding_card_options(table):
-            print("Your Turn to add cards, {}!\nHere are your options: ".format(self.nickname))
-            adding_card_num = input('{}\n Pick a card number from 0 till {} '
+            #print('T: {}'.format(table.show()))
+            print("Add card, {}:".format(self.nickname))
+            adding_card_num = input("{}\nPick a card number from 0 till {}\n'p' to pass\n"
                                     .format(self.adding_card_options(table),
                                             len(self.adding_card_options(table))-1))
+            if adding_card_num == 'p':
+                return None
             card_to_add = self.adding_card_options(table)[int(adding_card_num)]
+            print('card {} added'.format(card_to_add))
             self.remove_card(card_to_add)
             table.update_table(card_to_add)
+            print('T: {}'.format(table.show()))
             return card_to_add
         return None
 
@@ -203,6 +217,7 @@ class AiPlayerDumb(Player):
         attack_card = random.choice(self.cards)
         self.remove_card(attack_card)
         table.update_table(attack_card)
+        print('{} attack with {}'.format(self.nickname, attack_card))
         return attack_card
 
     def defend(self, table):
@@ -210,7 +225,13 @@ class AiPlayerDumb(Player):
             defence_card = random.choice(self.defending_options(table))
             self.remove_card(defence_card)
             table.update_table(defence_card)
+            #print('Ai defend table\n{}'.format(table.show()))
+            print('{} defended with {}'.format(self.nickname, defence_card))
+            #print('T def: {}'.format(table.show()))
             return defence_card
+        print(r"{} can't defend".format(self.nickname))
+        print('table:', table.show())
+        self.grab_table(table)
         return None
 
     def adding_card(self, table):
@@ -218,7 +239,11 @@ class AiPlayerDumb(Player):
             card_to_add = random.choice(self.adding_card_options(table))
             self.remove_card(card_to_add)
             table.update_table(card_to_add)
+            print('{} adding card {}'.format(self.nickname, card_to_add))
+            #print('T add: {}'.format(table.show()))
             return card_to_add
+        print('{} no cards to add'.format(self.nickname))
+        print('table: {}'.format(table.show()))
         return None
 
 
@@ -256,6 +281,10 @@ class Pointer:
         self.attacker_id = self._init_move_pointer()[0]
         self.defender_id = self._init_move_pointer()[1]
         if self.attacker_id == self.defender_id:
+            #fixme
+            print(self.attacker_id, self.defender_id)
+            print(list_of_player_instances[0].cards)
+            print(list_of_player_instances[1].cards)
             sys.exit('wrong attacker/defender ids')
 
     def _init_move_pointer(self):
@@ -265,7 +294,6 @@ class Pointer:
                 start_dict[the_player] = min([i[0] for i in the_player.cards if i[1] == 0])
             except ValueError as val_e:
                 pass
-                #print(val_e, r", it can't point which player move is now. Defining move order by random")
 
         try:
             attacker = min(start_dict, key=start_dict.get)
@@ -300,28 +328,43 @@ class Round:
 
     def round(self):
         if self.first_stage() == None:
-            print(r"defender can't defend from attacker")
+            #print(r"defender can't defend from attacker")
             self.defender.grab_table(self.table)
             self.attacker.draw_cards(self.deck)
             pass
         else:
             self.second_stage()
-            print('not made yet')
+            print('Round finished')
 
     def first_stage(self):
+        i = 0
+        print('\n')
+        print(i)
+        i = i + 1
         self.attacker.attack(self.table)
-        print("TABLE", self.table.cards)
         return self.defender.defend(self.table)
 
     def second_stage(self):
-        while self.attacker.adding_card(self.table) != None:
-            self.attacker.adding_card(self.table)
-            print("TABLE", self.table.cards)
-            self.defender.defend(self.table)
-        #pass
+        while True:
+            if self.attacker.adding_card(self.table) != None:
+                if self.defender.defend(self.table) != None:
+                    pass
 
+                else:
+                    #print('second_stage no options for defender')
+                    return False
+            else:
+                #print('seсond_stage no options for attacker')
+                return False
 
-
+        print('second_stage no cards')
+        '''
+        print('self table show', self.table.show())
+        self.pointer.switch()
+        self.attacker = players_list[self.pointer.attacker_id]
+        self.defender = players_list[self.pointer.defender_id]
+        print('succesfull defence')
+        '''
 class Game:
     def __init__(self, players_list, deck):
         self.players_list = players_list
@@ -338,17 +381,22 @@ class Game:
         pass
 
 
-p1 = HumanPlayer('ANTOHA')
-p2 = AiPlayerDumb('BOT')
-players_list = [p1, p2]
-deck = Deck(36)
-g = Game(players_list, deck)
-ptr = Pointer(players_list)
-print(ptr.show())
-r = Round(players_list, ptr, deck)
-print(deck.encoded_cards)
-print(p1.cards)
-print(p2.cards)
+i = 0
+while True:
+    print('iteration {}'.format(i))
+    #p1 = AiPlayerDumb('VALL E')
+    p1 = HumanPlayer('ANTOHA')
+    p2 = AiPlayerDumb('EVA')
+    players_list = [p1, p2]
+    deck = Deck(36)
+    g = Game(players_list, deck)
+    ptr = Pointer(players_list)
+    r = Round(players_list, ptr, deck)
+    print(deck.encoded_cards)
+    print(p1.cards)
+    print(p2.cards)
+    time.sleep(0.01)
+    i+=1
 
 #r.round_mechanics()
 '''
