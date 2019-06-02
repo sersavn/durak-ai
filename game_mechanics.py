@@ -142,13 +142,10 @@ class Pile:
 class Pointer:
     def __init__(self, list_of_player_instances):
         self.list_of_player_instances = list_of_player_instances
-        self.attacker_id = self._init_move_pointer()[0]
-        self.defender_id = self._init_move_pointer()[1]
+        self._move_pointer_condition = self._init_move_pointer()
+        self.attacker_id = self._move_pointer_condition[0]
+        self.defender_id = self._move_pointer_condition[1]
         if self.attacker_id == self.defender_id:
-            #fixme
-            print(self.attacker_id, self.defender_id)
-            print(list_of_player_instances[0].cards)
-            print(list_of_player_instances[1].cards)
             sys.exit('wrong attacker/defender ids')
 
     def _init_move_pointer(self):
@@ -238,21 +235,17 @@ class Round:
                     return False
             else:
                 print('_seсond_stage no options for attacker')
-
                 self.attacker.draw_cards(self.deck)
                 self.defender.draw_cards(self.deck)
                 self.pile.update(self.table)
                 self.table.clear()
-                print('1', self.pointer)
                 self.attacker, self.defender = self.defender, self.attacker
-                #self.pointer.switch()
-                print('2', self.pointer)
                 return False
         print('second_stage no cards')
 
 
-class Game:
-    def __init__(self, players_list, deck):
+class GameProcess:
+    def __init__(self, players_list, deck, logging=False):
         self.players_list = players_list
         self.deck = deck
         self.get_cards()
