@@ -50,6 +50,8 @@ class HumanPlayer(Player):
         super().__init__(nickname)
 
     def attack(self, table):
+        #print('n', print(len(self.cards)))
+        #print(table.cards)
         print("Your Turn to attack, {}:".format(self.nickname))
         attack_card_num = input('{}\nPick a card number from 0 till {} '
                                 .format(self.attacking_options(), len(self.attacking_options())-1))
@@ -61,7 +63,8 @@ class HumanPlayer(Player):
 
     def defend(self, table):
         print('T: {}'.format(table.show()))
-        print(self.cards)
+        #print('n', print(len(self.cards)))
+        #print(table.cards)
         if self.defending_options(table):
             print("Your Turn to defend, {}:".format(self.nickname))
             def_card_num = input("{}\nPick a card number from 0 till {}\n'g' to grab cards\n't' to check table\n'c' to show cards\n"
@@ -84,6 +87,7 @@ class HumanPlayer(Player):
         return None
 
     def adding_card(self, table):
+        #print('n', print(len(self.cards)))
         if self.adding_card_options(table):
             #print('T: {}'.format(table.show()))
             print("Add card, {}:".format(self.nickname))

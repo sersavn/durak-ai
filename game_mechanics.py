@@ -7,7 +7,7 @@ import time
 1. Add encoding legend +
 2. Add Human player class +
 3. Display trumps and cards left in deck in the begining of the round
-4. Add ability to pick different Ai playstyles
+4. Add ability to pick different Ai playstyles +
 5. Encode cards back +
 (6. Add way to collect data)
 (7. Imporve game visualization)
@@ -79,7 +79,7 @@ class DeckEncoder:
         suits_except_trump = list(set(suits))
         suits_except_trump.remove(trump)
         encode_dict = {trump : 0}
-        encode_dict.update(dict([(val, num +1) for num, val in enumerate(suits_except_trump)]))
+        encode_dict.update(dict([(val,num +1) for num, val in enumerate(suits_except_trump)]))
         #self.deck_instance.encode_legend = encode_dict
         return encode_dict
 
@@ -100,7 +100,7 @@ class DeckDecoder:
         self.deck_instance = deck_instance
 
     def decode(self):
-        encode_legend_rev = dict([[v, k] for k, v in self.deck_instance.encode_legend.items()])
+        encode_legend_rev = dict([[v,k] for k, v in self.deck_instance.encode_legend.items()])
         decoded_deck = [str(i[0]) + '_' + str(encode_legend_rev[i[1]]) \
                         for i in self.deck_instance.encoded_cards]
         self.deck_instance.cards = decoded_deck
@@ -177,10 +177,11 @@ class Pointer:
 
 
 class Round:
-    def __init__(self, players_list, pointer, deck):
+    def __init__(self, players_list, pointer, deck, logger=None):
         self.players_list = players_list
         self.pointer = pointer
         self.deck = deck
+        self.logger = logger
         self.attacker = players_list[pointer.attacker_id]
         self.defender = players_list[pointer.defender_id]
         self.table = Table()
@@ -210,24 +211,42 @@ class Round:
         if winners:
             if len(winners) == 2:
                 self.status = 'Draw'
+                if self.logger:
+                    self.logger.info(str('Draw'))
                 return 'DRAW'
             else:
                 self.status = winners[0]
+                if self.logger:
+                    data_to_log = 'Winner-' + str(self.status)
+                    self.logger.info(data_to_log)
                 return 'WIN'
 
     def _first_stage(self):
         self.attacker.attack(self.table)
+        if self.logger:
+            data_to_log = 'atk-'+str(self.attacker.nickname)+'-'+str(self.table.cards[-1])
+            self.logger.info(data_to_log)
+        # defender can't defend
         if self.defender.defend(self.table) is None:
             print('_first_stage no options for defender')
             self.attacker.draw_cards(self.deck)
             return True
+        # defender defended successfully
+        if self.logger:
+            data_to_log = '1def-'+str(self.defender.nickname)+'-'+str(self.table.cards[-1])
+            self.logger.info(data_to_log)
         return False
 
     def _second_stage(self):
         while True:
             if self.attacker.adding_card(self.table) is not None:
+                if self.logger:
+                    data_to_log = '2add-'+str(self.attacker.nickname)+'-'+str(self.table.cards[-1])
+                    self.logger.info(data_to_log)
                 if self.defender.defend(self.table) is not None:
-                    pass
+                    if self.logger:
+                        data_to_log = '2def-'+str(self.defender.nickname)+'-'+str(self.table.cards[-1])
+                        self.logger.info(data_to_log)
 
                 else:
                     print('_second_stage no options for defender')
@@ -245,9 +264,10 @@ class Round:
 
 
 class GameProcess:
-    def __init__(self, players_list, deck, logging=False):
+    def __init__(self, players_list, deck, logger=None):
         self.players_list = players_list
         self.deck = deck
+        self.logger = logger
         self.get_cards()
         self.pointer = Pointer(players_list)
         self.table = Table()
@@ -257,14 +277,16 @@ class GameProcess:
             player.draw_cards(self.deck)
 
     def play(self):
-        r = Round(self.players_list, self.pointer, self.deck)
+        r = Round(self.players_list, self.pointer, self.deck, self.logger)
         i = 0
+        if self.logger:
+            self.logger.info('Rnd-'+str(i))
         t = time.time()
         while r.status is None:
             print('\n')
             print('round {}'.format(i))
             r.round()
-            #time.sleep(0.05)
-
             i += 1
+            if self.logger:
+                self.logger.info('Rnd '+str(i))
         print(time.time() - t)
