@@ -288,5 +288,5 @@ class GameProcess:
             r.round()
             i += 1
             if self.logger:
-                self.logger.info('Rnd '+str(i))
+                self.logger.info('Rnd-'+str(i))
         print(time.time() - t)
