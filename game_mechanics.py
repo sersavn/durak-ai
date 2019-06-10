@@ -212,49 +212,58 @@ class Round:
             if len(winners) == 2:
                 self.status = 'Draw'
                 if self.logger:
-                    self.logger.info(str('Draw'))
+                    self.logger.info({"Winner" : "Draw"})
                 return 'DRAW'
             else:
                 self.status = winners[0]
                 if self.logger:
-                    data_to_log = 'Winner-' + str(self.status)
-                    self.logger.info(data_to_log)
+                    self.logger.info({"Winner" : str(self.status)})
                 return 'WIN'
 
     def _first_stage(self):
         self.attacker.attack(self.table)
         if self.logger:
-            card_to_log = '1atk-'+str(self.attacker.nickname)+'-'+str(self.table.cards[-1])
-            hand_to_log = str(self.attacker.cards)
-            self.logger.info('{}-{}'.format(card_to_log, hand_to_log))
+            log_d = {"1_atk" : str(self.table.cards[-1]), "nick" : str(self.attacker.nickname),
+                     "hand" : str(self.attacker.cards), "hand_size" : len(self.attacker.cards)}
+            self.logger.info(log_d)
         # defender can't defend
         if self.defender.defend(self.table) is None:
+            if self.logger:
+                log_d = {"grab" : str(self.defender.nickname), "hand" : str(self.defender.cards),
+                         "hand_size" : len(self.defender.cards)}
+                self.logger.info(log_d)
             print('_first_stage no options for defender')
             self.attacker.draw_cards(self.deck)
             return True
         # defender defended successfully
         if self.logger:
-            card_to_log = '1def-'+str(self.defender.nickname)+'-'+str(self.table.cards[-1])
-            hand_to_log = str(self.defender.cards)
-            self.logger.info('{}-{}'.format(card_to_log, hand_to_log))
+            log_d = {"1_def" : str(self.table.cards[-1]), "nick" : str(self.defender.nickname),
+                     "hand" : str(self.defender.cards), "hand_size" : len(self.defender.cards)}
+            self.logger.info(log_d)
         return False
 
     def _second_stage(self):
-        while True:
+        cnt = 1
+        while True and cnt < 6:
             if self.attacker.adding_card(self.table) is not None:
+                cnt += 1
                 if self.logger:
-                    card_to_log = '2add-'+str(self.attacker.nickname)+'-'+str(self.table.cards[-1])
-                    hand_to_log = str(self.attacker.cards)
-                    self.logger.info('{}-{}'.format(card_to_log, hand_to_log))
+                    log_d = {"{}_add".format(cnt) : str(self.table.cards[-1]), "nick" : str(self.attacker.nickname),
+                             "hand" : str(self.attacker.cards), "hand_size" : len(self.attacker.cards)}
+                    self.logger.info(log_d)
                 if self.defender.defend(self.table) is not None:
                     if self.logger:
-                        card_to_log = '2def-'+str(self.defender.nickname)+'-'+str(self.table.cards[-1])
-                        hand_to_log = str(self.defender.cards)
-                        self.logger.info('{}-{}'.format(card_to_log, hand_to_log))
+                        log_d = {"{}_def".format(cnt) : str(self.table.cards[-1]), "nick" : str(self.defender.nickname),
+                                 "hand" : str(self.defender.cards), "hand_size" : len(self.defender.cards)}
+                        self.logger.info(log_d)
 
                 else:
                     print('_second_stage no options for defender')
                     self.attacker.draw_cards(self.deck)
+                    if self.logger:
+                        log_d = {"grab" : str(self.defender.nickname),
+                                 "hand" : str(self.defender.cards), "hand_size" : len(self.defender.cards)}
+                        self.logger.info(log_d)
                     return False
             else:
                 print('_seсond_stage no options for attacker')
@@ -285,15 +294,15 @@ class GameProcess:
         r = Round(self.players_list, self.pointer, self.deck, self.pile, self.logger)
         i = 0
         if self.logger:
-            round_dict = {'round' : i, 'pile' : self.pile.show(), 'cards_left' : len(self.deck.encoded_cards)}
+            round_dict = {"Round" : i, "pile" : self.pile.show(), "cards_left" : len(self.deck.encoded_cards)}
             self.logger.info(round_dict)
         t = time.time()
         while r.status is None:
             print('\n')
-            print('round {}'.format(i))
+            print("round {}".format(i))
             r.round()
             i += 1
             if self.logger:
-                round_dict = {'round' : i, 'pile' : self.pile.show(), 'cards_left' : len(self.deck.encoded_cards)}
+                round_dict = {"Round" : i, "pile" : self.pile.show(), "cards_left" : len(self.deck.encoded_cards)}
                 self.logger.info(round_dict)
         print(time.time() - t)
