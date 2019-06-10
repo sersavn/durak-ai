@@ -177,7 +177,7 @@ class Pointer:
 
 
 class Round:
-    def __init__(self, players_list, pointer, deck, logger=None):
+    def __init__(self, players_list, pointer, deck, pile, logger=None):
         self.players_list = players_list
         self.pointer = pointer
         self.deck = deck
@@ -185,7 +185,7 @@ class Round:
         self.attacker = players_list[pointer.attacker_id]
         self.defender = players_list[pointer.defender_id]
         self.table = Table()
-        self.pile = Pile()
+        self.pile = pile
         self.status = None
 
     def round(self):
@@ -224,8 +224,9 @@ class Round:
     def _first_stage(self):
         self.attacker.attack(self.table)
         if self.logger:
-            data_to_log = 'atk-'+str(self.attacker.nickname)+'-'+str(self.table.cards[-1])
-            self.logger.info(data_to_log)
+            card_to_log = '1atk-'+str(self.attacker.nickname)+'-'+str(self.table.cards[-1])
+            hand_to_log = str(self.attacker.cards)
+            self.logger.info('{}-{}'.format(card_to_log, hand_to_log))
         # defender can't defend
         if self.defender.defend(self.table) is None:
             print('_first_stage no options for defender')
@@ -233,20 +234,23 @@ class Round:
             return True
         # defender defended successfully
         if self.logger:
-            data_to_log = '1def-'+str(self.defender.nickname)+'-'+str(self.table.cards[-1])
-            self.logger.info(data_to_log)
+            card_to_log = '1def-'+str(self.defender.nickname)+'-'+str(self.table.cards[-1])
+            hand_to_log = str(self.defender.cards)
+            self.logger.info('{}-{}'.format(card_to_log, hand_to_log))
         return False
 
     def _second_stage(self):
         while True:
             if self.attacker.adding_card(self.table) is not None:
                 if self.logger:
-                    data_to_log = '2add-'+str(self.attacker.nickname)+'-'+str(self.table.cards[-1])
-                    self.logger.info(data_to_log)
+                    card_to_log = '2add-'+str(self.attacker.nickname)+'-'+str(self.table.cards[-1])
+                    hand_to_log = str(self.attacker.cards)
+                    self.logger.info('{}-{}'.format(card_to_log, hand_to_log))
                 if self.defender.defend(self.table) is not None:
                     if self.logger:
-                        data_to_log = '2def-'+str(self.defender.nickname)+'-'+str(self.table.cards[-1])
-                        self.logger.info(data_to_log)
+                        card_to_log = '2def-'+str(self.defender.nickname)+'-'+str(self.table.cards[-1])
+                        hand_to_log = str(self.defender.cards)
+                        self.logger.info('{}-{}'.format(card_to_log, hand_to_log))
 
                 else:
                     print('_second_stage no options for defender')
@@ -271,16 +275,18 @@ class GameProcess:
         self.get_cards()
         self.pointer = Pointer(players_list)
         self.table = Table()
+        self.pile = Pile()
 
     def get_cards(self):
         for player in self.players_list:
             player.draw_cards(self.deck)
 
     def play(self):
-        r = Round(self.players_list, self.pointer, self.deck, self.logger)
+        r = Round(self.players_list, self.pointer, self.deck, self.pile, self.logger)
         i = 0
         if self.logger:
-            self.logger.info('Rnd-'+str(i))
+            round_dict = {'round' : i, 'pile' : self.pile.show(), 'cards_left' : len(self.deck.encoded_cards)}
+            self.logger.info(round_dict)
         t = time.time()
         while r.status is None:
             print('\n')
@@ -288,5 +294,6 @@ class GameProcess:
             r.round()
             i += 1
             if self.logger:
-                self.logger.info('Rnd-'+str(i))
+                round_dict = {'round' : i, 'pile' : self.pile.show(), 'cards_left' : len(self.deck.encoded_cards)}
+                self.logger.info(round_dict)
         print(time.time() - t)
