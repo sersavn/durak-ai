@@ -5,11 +5,13 @@ class Player:
 
     def draw_cards(self, deck_instance):
         n_cards_to_draw = 6 - len(self.cards)
+        if n_cards_to_draw < 0:
+            n_cards_to_draw = 0
         n_of_cards_left = len(deck_instance.encoded_cards)
         if n_of_cards_left > n_cards_to_draw:
             self.cards += deck_instance.encoded_cards[:n_cards_to_draw]
             deck_instance.update_deck(n_cards_to_draw)
-        elif n_of_cards_left != 0:
+        elif n_of_cards_left <= n_cards_to_draw:
             self.cards += deck_instance.encoded_cards[:]
             deck_instance.update_deck(n_of_cards_left)
         else:
@@ -43,6 +45,9 @@ class Player:
     def grab_table(self, table):
         self.cards += table.cards
         table.clear()
+
+    def _refresh(self):
+        self.cards = []
 
 
 class HumanPlayer(Player):

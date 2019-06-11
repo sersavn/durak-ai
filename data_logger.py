@@ -18,8 +18,11 @@ i = 0
 t = time.time()
 logger.addHandler(fh)
 logger.info({'Game' : 0})
-while i != 1:
+
+while i != 3:
     print(game_instance(players_list, logger))
+    print(P1.cards)
+    print(P2.cards)
     i += 1
     logger.info({"Game" : i})
     print(i)

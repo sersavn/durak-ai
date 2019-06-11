@@ -221,6 +221,9 @@ class Round:
                 return 'WIN'
 
     def _first_stage(self):
+        print('atk', len(self.attacker.cards))
+        print('def', len(self.defender.cards))
+        print('deck', len(self.deck.encoded_cards))
         self.attacker.attack(self.table)
         if self.logger:
             log_d = {"1_atk" : str(self.table.cards[-1]), "nick" : str(self.attacker.nickname),
@@ -286,6 +289,10 @@ class GameProcess:
         self.table = Table()
         self.pile = Pile()
 
+    def _refresh_game(self):
+        for p in self.players_list:
+            p._refresh()
+
     def get_cards(self):
         for player in self.players_list:
             player.draw_cards(self.deck)
@@ -305,4 +312,5 @@ class GameProcess:
             if self.logger:
                 round_dict = {"Round" : i, "pile" : self.pile.show(), "cards_left" : len(self.deck.encoded_cards)}
                 self.logger.info(round_dict)
-        print(time.time() - t)
+        if r.status is not None:
+            self._refresh_game()
