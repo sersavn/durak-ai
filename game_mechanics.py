@@ -36,9 +36,9 @@ class Deck:
         def card_range():
             try:
                 if self.size == 52:
-                    card_numbers = [i for i in range(2, 15)]
+                    card_numbers = list(range(2, 15))
                 elif self.size == 36:
-                    card_numbers = [i for i in range(6, 15)]
+                    card_numbers = list(range(6, 15))
                 return card_numbers
             except UnboundLocalError as card_amount_err:
                 print("{} Wrong amount of cards".format(card_amount_err))
@@ -61,6 +61,9 @@ class Deck:
         self.encoded_cards = self.encoded_cards[num_of_cards:]
 
     def show_last_card(self):
+        '''
+        Displays the trump card
+        '''
         return self.encoded_cards[-1]
 
 
@@ -79,7 +82,7 @@ class DeckEncoder:
         suits_except_trump = list(set(suits))
         suits_except_trump.remove(trump)
         encode_dict = {trump : 0}
-        encode_dict.update(dict([(val,num +1) for num, val in enumerate(suits_except_trump)]))
+        encode_dict.update(dict([(val, num +1) for num, val in enumerate(suits_except_trump)]))
         #self.deck_instance.encode_legend = encode_dict
         return encode_dict
 
@@ -100,13 +103,14 @@ class DeckDecoder:
         self.deck_instance = deck_instance
 
     def decode(self):
-        encode_legend_rev = dict([[v,k] for k, v in self.deck_instance.encode_legend.items()])
+        encode_legend_rev = dict([[v, k] for k, v in self.deck_instance.encode_legend.items()])
         decoded_deck = [str(i[0]) + '_' + str(encode_legend_rev[i[1]]) \
                         for i in self.deck_instance.encoded_cards]
         self.deck_instance.cards = decoded_deck
 
     def example(self):
-        return('input:\n{}\noutput:\n{}'.format(self.deck_instance.encoded_cards, self.deck_instance.cards))
+        return('input:\n{}\noutput:\n{}'.format(self.deck_instance.encoded_cards,
+                                                self.deck_instance.cards))
 
 
 class Table:
@@ -188,13 +192,14 @@ class Round:
         self.pile = pile
         self.status = None
 
-    def round(self):
+    def round_type(self):
         if self.check_cards():
             print(self.status)
             return self.status
-        if self._first_stage() == True:
+        if self._first_stage() is True:
             return "first_stage_finish"
         self._second_stage()
+        return True
 
     def check_cards(self):
         if self.deck.encoded_cards:
@@ -251,13 +256,17 @@ class Round:
             if self.attacker.adding_card(self.table) is not None:
                 cnt += 1
                 if self.logger:
-                    log_d = {"{}_add".format(cnt) : str(self.table.cards[-1]), "nick" : str(self.attacker.nickname),
-                             "hand" : str(self.attacker.cards), "hand_size" : len(self.attacker.cards)}
+                    log_d = {"{}_add".format(cnt) : str(self.table.cards[-1]),
+                             "nick" : str(self.attacker.nickname),
+                             "hand" : str(self.attacker.cards),
+                             "hand_size" : len(self.attacker.cards)}
                     self.logger.info(log_d)
                 if self.defender.defend(self.table) is not None:
                     if self.logger:
-                        log_d = {"{}_def".format(cnt) : str(self.table.cards[-1]), "nick" : str(self.defender.nickname),
-                                 "hand" : str(self.defender.cards), "hand_size" : len(self.defender.cards)}
+                        log_d = {"{}_def".format(cnt) : str(self.table.cards[-1]),
+                                 "nick" : str(self.defender.nickname),
+                                 "hand" : str(self.defender.cards),
+                                 "hand_size" : len(self.defender.cards)}
                         self.logger.info(log_d)
 
                 else:
@@ -265,7 +274,8 @@ class Round:
                     self.attacker.draw_cards(self.deck)
                     if self.logger:
                         log_d = {"grab" : str(self.defender.nickname),
-                                 "hand" : str(self.defender.cards), "hand_size" : len(self.defender.cards)}
+                                 "hand" : str(self.defender.cards),
+                                 "hand_size" : len(self.defender.cards)}
                         self.logger.info(log_d)
                     return False
             else:
@@ -290,27 +300,31 @@ class GameProcess:
         self.pile = Pile()
 
     def _refresh_game(self):
-        for p in self.players_list:
-            p._refresh()
+        for player in self.players_list:
+            player._refresh()
 
     def get_cards(self):
         for player in self.players_list:
             player.draw_cards(self.deck)
 
     def play(self):
-        r = Round(self.players_list, self.pointer, self.deck, self.pile, self.logger)
+        round = Round(self.players_list, self.pointer, self.deck, self.pile, self.logger)
         i = 0
         if self.logger:
-            round_dict = {"Round" : i, "pile" : self.pile.show(), "cards_left" : len(self.deck.encoded_cards)}
+            round_dict = {"Round" : i,
+                          "pile" : self.pile.show(),
+                          "cards_left" : len(self.deck.encoded_cards)}
             self.logger.info(round_dict)
-        t = time.time()
-        while r.status is None:
+
+        while round.status is None:
             print('\n')
             print("round {}".format(i))
-            r.round()
+            round.round_type()
             i += 1
             if self.logger:
-                round_dict = {"Round" : i, "pile" : self.pile.show(), "cards_left" : len(self.deck.encoded_cards)}
+                round_dict = {"Round" : i,
+                              "pile" : self.pile.show(),
+                              "cards_left" : len(self.deck.encoded_cards)}
                 self.logger.info(round_dict)
-        if r.status is not None:
+        if round.status is not None:
             self._refresh_game()
