@@ -31,8 +31,7 @@ class Deck:
     def __init__(self, size):
         self.size = size
         self.cards = self.get_deck() # self.cards > self.decoded_cards
-        self.encoded_cards = DeckEncoder(self).encode()
-        self.suit_encode_legend = DeckEncoder(self).suit_encode()
+        self.encoded_cards = self.get_deck()
         self.trump = self.encoded_cards[-1]
 
     def get_deck(self):
@@ -42,25 +41,22 @@ class Deck:
         def card_range():
             try:
                 if self.size == 52:
-                    card_numbers = list(range(2, 15))
+                    card_numbers = 4*list(range(2, 15))
                 elif self.size == 36:
-                    card_numbers = list(range(6, 15))
+                    card_numbers = 4*list(range(6, 15))
                 return card_numbers
             except UnboundLocalError as card_amount_err:
                 print("{} Wrong amount of cards".format(card_amount_err))
                 sys.exit(1)
 
-        def suits():
-            suits_pack = ['♠', '♥', '♦', '♣']
-            return suits_pack
-
         def random_deck():
-            cards = []
-            for number in card_range():
-                for suit in suits():
-                    cards.append(str(number) + '_' + str(suit))
-                    random.shuffle(cards)
-            return cards
+            cards = card_range()
+            suits = int(self.size/4) * [0, 1, 2, 3]
+            print(len(cards), len(suits))
+            resulted_deck = [[cards[i], suits[i]] for i in range(self.size)]
+            random.shuffle(resulted_deck)
+            return resulted_deck
+
         return random_deck()
 
     def update_deck(self, num_of_cards):
@@ -73,33 +69,7 @@ class Deck:
         return self.encoded_cards[-1]
 
 
-class DeckEncoder:
-    '''
-    Encoding all str to numerical
-    deck_instance == instance of the class Deck
-    '''
-    def __init__(self, deck_instance):
-        self.deck_instance = deck_instance
-        self.suit_encode_legend = self.suit_encode()
-
-    def suit_encode(self):
-        suits = [(i.split('_')[1]) for i in self.deck_instance.cards]
-        trump = suits[-1]
-        suits_except_trump = list(set(suits))
-        suits_except_trump.remove(trump)
-        encode_dict = {trump : 0}
-        encode_dict.update(dict([(val, num+1) for num, val in enumerate(suits_except_trump)]))
-        return encode_dict
-
-    def encode(self):
-        splitted_deck = [(i.split('_')) for i in self.deck_instance.cards]
-        for num, card in enumerate(splitted_deck):
-            print(splitted_deck[num][0], int(splitted_deck[num][0]))
-            splitted_deck[num][0] = int(splitted_deck[num][0])
-            splitted_deck[num][1] = self.suit_encode_legend[card[1]]
-        #self.deck_instance.encoded_cards = splitted_deck
-        return splitted_deck
-
+# Class DeckEncoder removed
 
 class DeckDecoder:
     '''
