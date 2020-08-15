@@ -26,8 +26,8 @@ logger.info({'Game' : 0})
 def play_game(list_of_players, logger=None):
     deck = game_mechanics.Deck(36)
     print(deck)
-    g = game_mechanics.GameProcess(players_list, deck, logger)
-    ptr = game_mechanics.Pointer(players_list)
+    g = game_mechanics.GameProcess(list_of_players, deck, logger)
+    ptr = game_mechanics.Pointer(list_of_players)
     g.play()
 
 #print(game_instance(players_list, logger))

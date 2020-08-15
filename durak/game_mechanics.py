@@ -19,15 +19,21 @@ import time
 
 class Deck:
     '''
-    Class Deck is needed to simulate the card Deck.
-    It has following methods:
-    To initialize Deck instance needed to specify size (36 or 52 cards)
+    | Class Deck is needed to simulate the card Deck.
+    | It has following methods:
+    | To initialize Deck instance needed to specify size (36 or 52 cards)
+
+    | Attributes:
+    | .encoded_cards
+    | .suit_encode_legend
+    | .trump
     '''
     def __init__(self, size):
         self.size = size
-        self.cards = self.get_deck()
+        self.cards = self.get_deck() # self.cards > self.decoded_cards
         self.encoded_cards = DeckEncoder(self).encode()
-        self.encode_legend = DeckEncoder(self).suit_encode()
+        self.suit_encode_legend = DeckEncoder(self).suit_encode()
+        self.trump = self.encoded_cards[-1]
 
     def get_deck(self):
         '''
@@ -45,8 +51,8 @@ class Deck:
                 sys.exit(1)
 
         def suits():
-            suits_pack_ = ['Diamonds', 'Hearts', 'Spades', 'Clubs']
-            return suits_pack_
+            suits_pack = ['♠', '♥', '♦', '♣']
+            return suits_pack
 
         def random_deck():
             cards = []
@@ -74,7 +80,7 @@ class DeckEncoder:
     '''
     def __init__(self, deck_instance):
         self.deck_instance = deck_instance
-        self.encode_legend = self.suit_encode()
+        self.suit_encode_legend = self.suit_encode()
 
     def suit_encode(self):
         suits = [(i.split('_')[1]) for i in self.deck_instance.cards]
@@ -82,15 +88,15 @@ class DeckEncoder:
         suits_except_trump = list(set(suits))
         suits_except_trump.remove(trump)
         encode_dict = {trump : 0}
-        encode_dict.update(dict([(val, num +1) for num, val in enumerate(suits_except_trump)]))
-        #self.deck_instance.encode_legend = encode_dict
+        encode_dict.update(dict([(val, num+1) for num, val in enumerate(suits_except_trump)]))
         return encode_dict
 
     def encode(self):
         splitted_deck = [(i.split('_')) for i in self.deck_instance.cards]
         for num, card in enumerate(splitted_deck):
+            print(splitted_deck[num][0], int(splitted_deck[num][0]))
             splitted_deck[num][0] = int(splitted_deck[num][0])
-            splitted_deck[num][1] = self.encode_legend[card[1]]
+            splitted_deck[num][1] = self.suit_encode_legend[card[1]]
         #self.deck_instance.encoded_cards = splitted_deck
         return splitted_deck
 
@@ -101,12 +107,27 @@ class DeckDecoder:
     '''
     def __init__(self, deck_instance):
         self.deck_instance = deck_instance
+        self.card_encode_legend = {'2' : '2',
+                                   '3' : '3',
+                                   '4' : '4',
+                                   '5' : '5',
+                                   '6' : '6',
+                                   '7' : '7',
+                                   '8' : '8',
+                                   '9' : '9',
+                                   '10' : '10',
+                                   '11' : 'J',
+                                   '12' : 'Q',
+                                   '13' : 'K',
+                                   '14' : 'A'}
 
     def decode(self):
-        encode_legend_rev = dict([[v, k] for k, v in self.deck_instance.encode_legend.items()])
-        decoded_deck = [str(i[0]) + '_' + str(encode_legend_rev[i[1]]) \
-                        for i in self.deck_instance.encoded_cards]
+        encode_legend_rev = dict([[v, k] for k, v in self.deck_instance.suit_encode_legend.items()])
+        decoded_deck = [self.card_encode_legend[str(i[0])] + '_' + str(encode_legend_rev[i[1]]) \
+                            for i in self.deck_instance.encoded_cards]
+        #print(decoded_deck)
         self.deck_instance.cards = decoded_deck
+        return decoded_deck
 
     def example(self):
         return('input:\n{}\noutput:\n{}'.format(self.deck_instance.encoded_cards,
@@ -193,7 +214,7 @@ class Round:
         self.status = None
 
     def round_type(self):
-        if self.check_cards():
+        if self.check_if_deck_empty():
             print(self.status)
             return self.status
         if self._first_stage() is True:
@@ -201,7 +222,7 @@ class Round:
         self._second_stage()
         return True
 
-    def check_cards(self):
+    def check_if_deck_empty(self):
         if self.deck.encoded_cards:
             pass
         else:
