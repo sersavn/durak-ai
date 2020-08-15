@@ -30,7 +30,7 @@ class Deck:
     '''
     def __init__(self, size):
         self.size = size
-        self.cards = self.get_deck() # self.cards > self.decoded_cards
+        #self.cards = self.get_deck() # self.cards > self.decoded_cards
         self.encoded_cards = self.get_deck()
         self.trump = self.encoded_cards[-1]
 
@@ -52,28 +52,22 @@ class Deck:
         def random_deck():
             cards = card_range()
             suits = int(self.size/4) * [0, 1, 2, 3]
-            print(len(cards), len(suits))
             resulted_deck = [[cards[i], suits[i]] for i in range(self.size)]
             random.shuffle(resulted_deck)
             return resulted_deck
-
         return random_deck()
 
     def update_deck(self, num_of_cards):
         self.encoded_cards = self.encoded_cards[num_of_cards:]
 
-    def show_last_card(self):
-        '''
-        Displays the trump card
-        '''
-        return self.encoded_cards[-1]
-
-
-# Class DeckEncoder removed
 
 class DeckDecoder:
     '''
     Encoding all numerical back to str
+
+    suits_pack = ['♠', '♥', '♦', '♣']
+    no need for the class
+
     '''
     def __init__(self, deck_instance):
         self.deck_instance = deck_instance
@@ -95,7 +89,6 @@ class DeckDecoder:
         encode_legend_rev = dict([[v, k] for k, v in self.deck_instance.suit_encode_legend.items()])
         decoded_deck = [self.card_encode_legend[str(i[0])] + '_' + str(encode_legend_rev[i[1]]) \
                             for i in self.deck_instance.encoded_cards]
-        #print(decoded_deck)
         self.deck_instance.cards = decoded_deck
         return decoded_deck
 
@@ -103,12 +96,12 @@ class DeckDecoder:
         return('input:\n{}\noutput:\n{}'.format(self.deck_instance.encoded_cards,
                                                 self.deck_instance.cards))
 
-
 class Table:
     def __init__(self):
         self.cards = []
 
     def update_table(self, card):
+        '''adding card to a table'''
         self.cards += [card]
 
     def move_to_pile(self):
@@ -181,12 +174,12 @@ class Round:
         self.defender = players_list[pointer.defender_id]
         self.table = Table()
         self.pile = pile
-        self.status = None
+        self.game_status = None
 
     def round_type(self):
         if self.check_if_deck_empty():
-            print(self.status)
-            return self.status
+            print('self.game_status', self.game_status)
+            return self.game_status
         if self._first_stage() is True:
             return "first_stage_finish"
         self._second_stage()
@@ -206,15 +199,15 @@ class Round:
             winners.append(self.defender.nickname)
         if winners:
             if len(winners) == 2:
-                self.status = 'Draw'
+                self.game_status = 'Draw'
                 if self.logger:
                     self.logger.info({"Winner" : "Draw"})
                 return 'DRAW'
-            else:
-                self.status = winners[0]
-                if self.logger:
-                    self.logger.info({"Winner" : str(self.status)})
-                return 'WIN'
+            #else:
+            self.game_status = winners[0]
+            if self.logger:
+                self.logger.info({"Winner" : str(self.game_status)})
+            return 'WIN'
 
     def _first_stage(self):
         print('atk', len(self.attacker.cards))
@@ -243,7 +236,8 @@ class Round:
 
     def _second_stage(self):
         cnt = 1
-        while True and cnt < 6:
+        #while True and cnt < 6:
+        while cnt < 6:
             if self.attacker.adding_card(self.table) is not None:
                 cnt += 1
                 if self.logger:
@@ -278,6 +272,13 @@ class Round:
                 self.attacker, self.defender = self.defender, self.attacker
                 return False
         print('second_stage no cards')
+        self.attacker.draw_cards(self.deck)
+        self.defender.draw_cards(self.deck)
+        self.pile.update(self.table)
+        self.table.clear()
+        self.attacker, self.defender = self.defender, self.attacker
+        return False
+
 
 
 class GameProcess:
@@ -307,7 +308,7 @@ class GameProcess:
                           "cards_left" : len(self.deck.encoded_cards)}
             self.logger.info(round_dict)
 
-        while round.status is None:
+        while round.game_status is None:
             print('\n')
             print("round {}".format(i))
             round.round_type()
@@ -317,5 +318,8 @@ class GameProcess:
                               "pile" : self.pile.show(),
                               "cards_left" : len(self.deck.encoded_cards)}
                 self.logger.info(round_dict)
-        if round.status is not None:
+        # game completed
+        if round.game_status is not None:
             self._refresh_game()
+            return round.game_status
+            #print('round.game_status', round.game_status) # new line

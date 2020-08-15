@@ -51,3 +51,6 @@ class AIPlayerDumb(Player):
         print('{} no cards to add'.format(self.nickname))
         print('table: {}'.format(table.show()))
         return None
+
+class AIPlayerLowestCard(Player):
+    pass
