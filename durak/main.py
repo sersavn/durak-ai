@@ -3,6 +3,8 @@ import os
 #from game_mechanics import *
 import game_mechanics
 from durak_ai import AIPlayerDumb
+from durak_ai import AIPlayerLowestCard
+from durak_ai import AIPlayerLowestCardDontWastingTrumps
 from player import HumanPlayer
 
 
@@ -12,6 +14,9 @@ class Game:
 
 p1 = AIPlayerDumb('VALL E')
 p2 = AIPlayerDumb('EVA')
+p3 = AIPlayerLowestCard('EVA')
+p4 = AIPlayerLowestCardDontWastingTrumps('EVA2')
+
 players_list = [p1, p2]
 
 if os.path.isfile('game.log'):
