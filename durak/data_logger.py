@@ -1,7 +1,7 @@
 import logging
 import time
 import os
-from durak_ai import AiPlayerDumb
+from player import AIPlayerDumb
 from game import game_instance
 
 if os.path.isfile('game.log'):

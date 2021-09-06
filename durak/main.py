@@ -2,9 +2,9 @@ import logging
 import os
 #from game_mechanics import *
 import game_mechanics
-from durak_ai import AIPlayerDumb
-from durak_ai import AIPlayerLowestCard
-from durak_ai import AIPlayerLowestCardDontWastingTrumps
+from player import AIPlayerDumb
+from player import AIPlayerLowestCard
+from player import AIPlayerLowestCardDontWastingTrumps
 from player import HumanPlayer
 
 
@@ -35,4 +35,5 @@ def play_game(list_of_players, logger=None):
     # g.play() old
     return g.play()
 
+play_game([p1, p1])
 #print(game_instance(players_list, logger))
