@@ -7,11 +7,6 @@ from player import AIPlayerLowestCard
 from player import AIPlayerLowestCardDontWastingTrumps
 from player import HumanPlayer
 
-
-class Game:
-    def __init__(self, players_list):
-        players_list = self.players_list
-
 p1 = AIPlayerDumb('VALL E')
 p2 = AIPlayerDumb('EVA')
 p3 = AIPlayerLowestCard('EVA')
@@ -26,14 +21,17 @@ logger = logging.getLogger('logging_games')
 logger.setLevel(logging.INFO)
 fh = logging.FileHandler('game.log')
 logger.addHandler(fh)
-logger.info({'Game' : 0})
 
 def play_game(list_of_players, logger=None):
     deck = game_mechanics.Deck(36)
     g = game_mechanics.GameProcess(list_of_players, deck, logger)
-    ptr = game_mechanics.Pointer(list_of_players)
-    # g.play() old
+    #ptr = game_mechanics.Pointer(list_of_players)
     return g.play()
 
-play_game([p1, p1])
-#print(game_instance(players_list, logger))
+def play_n_games(n_games, list_of_players, logger=None):
+    for i in range(n_games):
+        logger.info({'Game' : i})
+        play_game(list_of_players=list_of_players, logger=logger)
+    return 'Done'
+
+play_n_games(1000, players_list, logger=logger)

@@ -210,57 +210,88 @@ class Round:
             return 'WIN'
 
     def _first_stage(self):
+        turn = 1
         print('atk', len(self.attacker.cards))
         print('def', len(self.defender.cards))
         print('deck', len(self.deck.encoded_cards))
+
         self.attacker.attack(self.table)
-        if self.logger:
-            log_d = {"1_atk" : str(self.table.cards[-1]), "nick" : str(self.attacker.nickname),
-                     "hand" : str(self.attacker.cards), "hand_size" : len(self.attacker.cards)}
-            self.logger.info(log_d)
+        atk_c = str(self.table.cards[-1])
+        atk = str(self.attacker.nickname)
+        atk_h = str(self.attacker.cards)
+        atk_hs = len(self.attacker.cards)
+
         # defender can't defend
         if self.defender.defend(self.table) is None:
             if self.logger:
-                log_d = {"grab" : str(self.defender.nickname), "hand" : str(self.defender.cards),
-                         "hand_size" : len(self.defender.cards)}
+                log_d = {"turn" : turn,
+                         "atk_c" : atk_c,
+                         "atk" : atk,
+                         "atk_h" : atk_h,
+                         "atk_hs" : atk_hs,
+                         "def" : str(self.defender.nickname),
+                         "def_h" : str(self.defender.cards),
+                         "def_hs" : len(self.defender.cards),
+                         "grab" : 1}
                 self.logger.info(log_d)
             print('_first_stage no options for defender')
             self.attacker.draw_cards(self.deck)
             return True
+
         # defender defended successfully
         if self.logger:
-            log_d = {"1_def" : str(self.table.cards[-1]), "nick" : str(self.defender.nickname),
-                     "hand" : str(self.defender.cards), "hand_size" : len(self.defender.cards)}
+            log_d = {"turn" : turn,
+                     "atk_c" : atk_c,
+                     "atk" : atk,
+                     "atk_h" : atk_h,
+                     "atk_hs" : atk_hs,
+                     "def_c" : str(self.table.cards[-1]),
+                     "def" : str(self.defender.nickname),
+                     "def_h" : str(self.defender.cards),
+                     "def_hs" : len(self.defender.cards)}
             self.logger.info(log_d)
         return False
 
     def _second_stage(self):
         cnt = 1
+        turn = 1
         #while True and cnt < 6:
         while cnt < 6:
             if self.attacker.adding_card(self.table) is not None:
                 cnt += 1
-                if self.logger:
-                    log_d = {"{}_add".format(cnt) : str(self.table.cards[-1]),
-                             "nick" : str(self.attacker.nickname),
-                             "hand" : str(self.attacker.cards),
-                             "hand_size" : len(self.attacker.cards)}
-                    self.logger.info(log_d)
+                turn += 1
+
+                atk_c = str(self.table.cards[-1])
+                atk = str(self.attacker.nickname)
+                atk_h = str(self.attacker.cards)
+                atk_hs = len(self.attacker.cards)
+
                 if self.defender.defend(self.table) is not None:
                     if self.logger:
-                        log_d = {"{}_def".format(cnt) : str(self.table.cards[-1]),
-                                 "nick" : str(self.defender.nickname),
-                                 "hand" : str(self.defender.cards),
-                                 "hand_size" : len(self.defender.cards)}
+                        log_d = {"turn" : turn,
+                                 "atk_c" : atk_c,
+                                 "atk" : atk,
+                                 "atk_h" : atk_h,
+                                 "atk_hs" : atk_hs,
+                                 "def_c" : str(self.table.cards[-1]),
+                                 "def" : str(self.defender.nickname),
+                                 "def_h" : str(self.defender.cards),
+                                 "def_hs" : len(self.defender.cards)}
                         self.logger.info(log_d)
 
                 else:
                     print('_second_stage no options for defender')
                     self.attacker.draw_cards(self.deck)
                     if self.logger:
-                        log_d = {"grab" : str(self.defender.nickname),
-                                 "hand" : str(self.defender.cards),
-                                 "hand_size" : len(self.defender.cards)}
+                        log_d = {"turn" : turn,
+                                 "atk_c" : atk_c,
+                                 "atk" : atk,
+                                 "atk_h" : atk_h,
+                                 "atk_hs" : atk_hs,
+                                 "def" : str(self.defender.nickname),
+                                 "def_h" : str(self.defender.cards),
+                                 "def_hs" : len(self.defender.cards),
+                                 "grab" : 1}
                         self.logger.info(log_d)
                     return False
             else:
@@ -300,7 +331,11 @@ class GameProcess:
             player.draw_cards(self.deck)
 
     def play(self):
-        round = Round(self.players_list, self.pointer, self.deck, self.pile, self.logger)
+        round = Round(self.players_list,
+                      self.pointer,
+                      self.deck,
+                      self.pile,
+                      self.logger)
         i = 0
         if self.logger:
             round_dict = {"Round" : i,
@@ -308,7 +343,7 @@ class GameProcess:
                           "cards_left" : len(self.deck.encoded_cards)}
             self.logger.info(round_dict)
 
-        while round.game_status is None:
+        while (round.game_status is None) and (i<100):
             print('\n')
             print("round {}".format(i))
             round.round_type()
@@ -322,4 +357,3 @@ class GameProcess:
         if round.game_status is not None:
             self._refresh_game()
             return round.game_status
-            #print('round.game_status', round.game_status) # new line
